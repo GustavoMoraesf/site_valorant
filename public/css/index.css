@@ -7,6 +7,16 @@
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+a {
+  text-decoration: none; 
+  color: inherit;        
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
 body {
     background: linear-gradient(
         #2d3d59,
@@ -38,6 +48,13 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
+}
+
+.navbar a.agora {
+    color: #a83c49;
+    font-weight: bolder;
+    text-shadow: 0 0 5px #a83c4968, 0 0 10px #a83c4968, 0 0 20px #a83c4968, 0 0 40px #a83c4968;
+    transform: scale(1.05);
 }
 
 .navbar li {
@@ -159,29 +176,6 @@ body {
     transform: translate(-50%, -50%); 
 }
 
-.titulos_sobre_1, 
-.titulos_agentes_1, 
-.titulos_mapa_1, 
-.titulos_arsenal_1 {
-    font-size: 70px;
-    color: white;
-    opacity: 0.1;
-    position: relative;
-    z-index: 1;
-}
-
-.titulos_sobre_2, 
-.titulos_agentes_2, 
-.titulos_mapa_2, 
-.titulos_arsenal_2 {
-    font-size: 38px;
-    color: white;
-    position: relative;
-    z-index: 2;
-    margin-top: -55px; 
-    margin-left: 40px;
-    margin-bottom: 50px;
-}
 
 /* --- Seção Sobre --- */
 .sobre {
@@ -193,6 +187,24 @@ body {
     background: url(../../assets/imgs/haven.png) no-repeat center;
     background-size: cover;
     color: white;
+}
+
+.titulos_sobre_1 {
+    font-size: 70px;
+    color: white;
+    opacity: 0.1;
+    position: relative;
+    z-index: 1;
+}
+
+.titulos_sobre_2 {
+    font-size: 38px;
+    color: white;
+    position: relative;
+    z-index: 2;
+    margin-top: -55px; 
+    margin-left: 40px;
+    margin-bottom: 50px;
 }
 
 .conteudo_sobre {
@@ -212,6 +224,24 @@ body {
     color: white;
 }
 
+.titulos_agentes_1 {
+    font-size: 70px;
+    color: white;
+    opacity: 0.1;
+    position: relative;
+    z-index: 1;
+}
+
+.titulos_agentes_2 {
+    font-size: 38px;
+    color: white;
+    position: relative;
+    z-index: 2;
+    margin-top: -55px; 
+    margin-left: 40px;
+    margin-bottom: 50px;
+}
+
 .agentes_1 {
     display: flex;
     justify-content: center;
@@ -229,19 +259,22 @@ body {
     margin-left: 80px;
 }
 
-.conteudo_agentes p { margin-right: 100px; }
-.img_jett { margin: 0 80px; }
+.conteudo_agentes p { 
+    margin-right: 100px; 
+}
+
+.img_jett { 
+    margin: 0 80px; 
+}
 
 .btn_agentes, 
-.btn_agentes_jogar, 
-.btn_mapa {
+.btn_agentes_jogar{
     margin-top: 50px;
     text-align: center;
 }
 
 .btn_agentes button,
-.btn_agentes_jogar button, 
-.btn_mapa button {
+.btn_agentes_jogar button{
     width: 120px;
     padding: 10px;
     border: white solid 2px;
@@ -252,8 +285,7 @@ body {
 }
 
 .btn_agentes button:hover, 
-.btn_agentes_jogar button:hover, 
-.btn_mapa button:hover {
+.btn_agentes_jogar button:hover {
     background-color: #ffffff5f;
     transform: scale(1.05);
 }
@@ -270,12 +302,55 @@ body {
     color: white;
 }
 
+.titulos_mapa_1{
+    font-size: 70px;
+    color: white;
+    opacity: 0.1;
+    position: relative;
+    z-index: 1;
+}
+
+
+.titulos_mapa_2{
+    font-size: 38px;
+    color: white;
+    position: relative;
+    z-index: 2;
+    margin-top: -55px; 
+    margin-left: 40px;
+    margin-bottom: 50px;
+}
+
 .conteudo_mapa {
     position: relative;
     margin-left: 80px;
 }
 
-.img_mapas { margin: 0 80px; }
+.img_mapas { 
+    margin: 0 80px; 
+}
+
+
+.btn_mapa {
+    margin-top: 50px;
+    text-align: center;
+}
+
+ 
+.btn_mapa button {
+    width: 120px;
+    padding: 10px;
+    border: white solid 2px;
+    background-color: #a83c49;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn_mapa button:hover {
+    background-color: #ffffff5f;
+    transform: scale(1.05);
+}
 
 /* --- Seção ARSENAL --- */
 .arsenal {
@@ -288,6 +363,25 @@ body {
     background-size: cover;
     color: white;
 }
+
+.titulos_arsenal_1 {
+    font-size: 70px;
+    color: white;
+    opacity: 0.1;
+    position: relative;
+    z-index: 1;
+}
+
+.titulos_arsenal_2 {
+    font-size: 38px;
+    color: white;
+    position: relative;
+    z-index: 2;
+    margin-top: -55px; 
+    margin-left: 40px;
+    margin-bottom: 50px;
+}
+
 
 .conteudo_arsenal {
     position: relative;
@@ -361,4 +455,5 @@ body {
     background-color: #1F2326;
     z-index: 5;
 }
+
 

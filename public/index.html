@@ -16,16 +16,16 @@
         <div class="navbar">
             <ul class="links">
                 <li>
-                    <a href="">Home</a>
+                    <a href="#home" class="agora">Home</a>
                 </li>
                 <li>
-                    <a href="">Agentes</a>
+                    <a href="agentes.html">Agentes</a>
                 </li>
                 <li>
-                    <a href="">Mapas</a>
+                    <a href="#mapas">Mapas</a>
                 </li>
                 <li>
-                    <a href="">Arsenal</a>
+                    <a href="#arsenal">Arsenal</a>
                 </li>
                 <li>
                     <a href=""></a>
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div class="inicio">
+    <div id="home" class="inicio">
         <video autoplay muted loop class="video_inicio">
             <source src="../assets/imgs/Intro_site.mp4" type="video/mp4" />
         </video>
@@ -98,7 +98,7 @@
                     separa jogadores comuns de verdadeiros estrategistas.
                 </p>
                 <div class="btn_agentes">
-                    <button>VER MAIS</button>
+                    <a href="agentes.html"><button>VER MAIS</button></a>
                 </div>
             </div>
             <div>
@@ -140,7 +140,7 @@
         </div>
     </div>
 
-    <div class="arsenal">
+    <div class="arsenal" id="arsenal">
         <div class="conteudo_arsenal">
             <h1 class="titulos_arsenal_1"><i>ARSENAL</i></h1>
             <h1 class="titulos_arsenal_2">ARSENAL</h1>
@@ -237,6 +237,14 @@
         arma.innerHTML = listaArmas[slideAtual]
         tipo.innerHTML = `Tipo: ${listaTipo[slideAtual]}`
         contexto.innerHTML = listaContexto[slideAtual]
+    }
+
+    function irParaSecao() {
+        let valor = agentes.value;
+
+        document.getElementById(valor).scrollIntoView({
+                behavior: "smooth"
+        });
     }
 
     console.log(slider)

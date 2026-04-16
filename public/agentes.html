@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentes | Valorant Universe</title>
+    <link rel="stylesheet" href="css/agentes.css" />
+</head>
+<body>
+    <div class="header">
+        <div class="icon">
+            <img src="../assets/icon/icon.png" alt="" />
+        </div>
+        <div class="navbar">
+            <ul class="links">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a class="agora" href="agentes.html">Agentes</a>
+                </li>
+                <li>
+                    <a href="">Mapas</a>
+                </li>
+                <li>
+                    <a href="index.html#arsenal">Arsenal</a>
+                </li>
+                <li>
+                    <a href=""></a>
+                </li>
+                <li>
+                    <a href=""></a>
+                </li>
+            </ul>
+        </div>
+        <div class="login_botao">
+            <button class="btn_entrar">Entrar</button>
+        </div>
+    </div>
+
+    <div class="pag_agentes">
+        <div class="agentes">
+            <div class="conteudo_agentes">
+                <h1 class="titulos_agentes_1"><i>AGENTES</i></h1>
+                <h1 class="titulos_agentes_2">AGENTES</h1>
+            </div>
+            <div class="select-container">
+                <select id="agentes" onchange="irParaAgentes()">
+                    <option selected disabled value="">Selecione um Agente</option>
+                    <option value="astra">Astra</option>
+                    <option value="breach">Breach</option>
+                    <option value="brimstone">Brimstone</option>
+                    <option value="chamber">Chamber</option>
+                    <option value="clove">Clove</option>
+                    <option value="cypher">Cypher</option>
+                    <option value="deadlock">Deadlock</option>
+                    <option value="fade">Fade</option>
+                    <option value="gekko">Gekko</option>
+                    <option value="harbor">Harbor</option>
+                    <option value="iso">Iso</option>
+                    <option value="jett">Jett</option>
+                    <option value="kayo">KAY/O</option>
+                    <option value="killjoy">Killjoy</option>
+                    <option value="neon">Neon</option>
+                    <option value="omen">Omen</option>
+                    <option value="phoenix">Phoenix</option>
+                    <option value="raze">Raze</option>
+                    <option value="reyna">Reyna</option>
+                    <option value="sage">Sage</option>
+                    <option value="skye">Skye</option>
+                    <option value="sova">Sova</option>
+                    <option value="viper">Viper</option>
+                    <option value="yoru">Yoru</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="imgs">
+            <div class="card" id="astra">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_astra.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_astra.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <p>ASTRA</p>
+            </div>
+            <div class="card" id="breach">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_breach.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_breach.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <p>BREACH</p>
+            </div>
+            <div class="card" id="brimstone">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_brimstone.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_brimstone.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <p>BRIMSTONE</p>
+            </div>
+        </div>
+
+        <div class="imgs">
+            <div class="card" id="chamber">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_chamber.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_chamber.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>CHAMBER</p>
+            </div>
+            <div class="card" id="clove">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_clove.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_clove.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>CLOVE</p>
+            </div>
+            <div class="card" id="cypher">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_cypher.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_cypher.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>CYPHER</p>
+            </div>
+        </div>
+
+        <div class="imgs">
+            <div class="card" id="deadlock">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_deadlock.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_deadlock.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>DEADLOCK</p>
+            </div>
+            <div class="card" id="fade">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_fade.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_fade.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>FADE</p>
+            </div>
+            <div class="card" id="gekko">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_gekko.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_gekko.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>GEKKO</p>
+            </div>
+        </div>
+
+        <div class="imgs">
+            <div class="card" id="harbor">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_harbor.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_harbor.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>HARBOR</p>
+            </div>
+            <div class="card" id="iso">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_iso.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_iso.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>ISO</p>
+            </div>
+            <div class="card" id="jett">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_jett.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_jett.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>JETT</p>
+            </div>
+        </div>
+
+        <div class="imgs">
+            <div class="card" id="kayo">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_kayo.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_kayo.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>KAYO</p>
+            </div>
+            <div class="card" id="killjoy">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_killjoy.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_killjoy.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>KILLJOY</p>
+            </div>
+            <div class="card" id="neon">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_neon.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_neon.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>NEON</p>
+            </div>
+        </div>
+
+        <div class="imgs">
+            <div class="card" id="omen">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_omen.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_omen.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>OMEN</p>
+            </div>
+            <div class="card" id="phoenix">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_phoenix.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_phoenix.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>PHOENIX</p>
+            </div>
+            <div class="card" id="raze">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_raze.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_raze.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>RAZE</p>
+            </div>
+        </div>
+
+        <div class="imgs">
+            <div class="card" id="reyna">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_reyna.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_reyna.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>REYNA</p>
+            </div>
+            <div class="card" id="sage">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_sage.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_sage.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>SAGE</p>
+            </div>
+            <div class="card" id="skye">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_skye.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_skye.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>SKYE</p>
+            </div>
+        </div>
+
+        <div class="imgs">
+            <div class="card" id="sova">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_sova.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_sova.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>SOVA</p>
+            </div>
+            <div class="card" id="viper">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_viper.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_viper.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>VIPER</p>
+            </div>  
+            <div class="card" id="yoru">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img class="flip-card-image" src="../assets/imgs/card_yoru.png" alt="">
+                        </div>
+                        <div class="flip-card-back">
+                            <img class="flip-card-image" src="../assets/imgs/card_yoru.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+                <p>YORU</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p></p>
+    </div>
+</body>
+</html>
+
+<script>
+    function irParaAgentes() {
+        let valor = agentes.value;
+
+        document.getElementById(valor).scrollIntoView({
+                behavior: "smooth"
+        });
+    }
+</script>
