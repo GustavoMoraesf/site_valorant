@@ -209,7 +209,7 @@ select:focus {
     margin: 0;
 }
 
-.card p{
+.nome_personagem{
     margin: 0;
     background-color: #B1B1B1;
     padding: 10px;
@@ -246,7 +246,7 @@ select:focus {
 #sova,
 #viper,
 #yoru{
-    scroll-margin-top: 100px;
+    scroll-margin-top: 150px;
 }
 
 
@@ -277,6 +277,16 @@ select:focus {
 
 .flip-card-back {
     transform: rotateY(180deg);
+    background: linear-gradient(
+        #1A222D,
+        #373E49
+    );
+    color: white;
+}
+
+.personagem{
+    margin: 20px;
+    font-size: small;
 }
 
 .flip-card-back,
@@ -285,6 +295,18 @@ select:focus {
     height: 100%;
     position: absolute;
     backface-visibility: hidden;
+}
+
+.habilidades{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 0 20px 20px 20px;
+}
+
+.habilidades p{
+    font-size: small;
 }
 
 /* --- Footer --*/
