@@ -7,17 +7,17 @@
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+a {
+  text-decoration: none; 
+  color: inherit;        
+}
+
 html {
     scroll-behavior: smooth;
 }
 
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    z-index: 0;
-    
     background-color: #2d3d59;
 }
 
@@ -27,14 +27,10 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-
     background-color: #1F2326;
-
     height: 80px;
     width: 100%;
-
-    position: sticky;
-    top: 0;
+    position: fixed;
     z-index: 10;
 }
 
@@ -47,7 +43,6 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
     color: white;
 }
 
@@ -102,7 +97,7 @@ body {
     transform: scale(1.05);
 }
 
-.pag_agentes{
+.pag_mapas{
     display: flex;
     flex-direction: column;
 
@@ -113,31 +108,26 @@ body {
     padding: 50px 0; 
 }
 
-/* --- Seção do titulo --*/
 
-.agentes {
+.mapa {
     display: flex;
-    flex-direction: row;
-
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-
-    width: 90%;
-    margin-bottom: 10px;
+    width: 100%;
+    padding-top: 100px; 
     color: white;
-
-    z-index: 0;
 }
 
-.titulos_agentes_1 {
+.titulos_mapa_1{
     font-size: 70px;
     color: white;
-    opacity: 0.1;
+    opacity: 0.15;
     position: relative;
     z-index: 1;
 }
 
-.titulos_agentes_2 {
+
+.titulos_mapa_2{
     font-size: 38px;
     color: white;
     position: relative;
@@ -147,174 +137,75 @@ body {
     margin-bottom: 50px;
 }
 
-select {
-    background-color: #1F2326;
-    color: white;
-    border: 2px solid #ff4655;
-    border-radius: 8px;
-    padding: 10px 40px 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    transition: all 0.3s ease;
-
-    min-width: 220px;
-}
-
-select:hover {
-    border-color: #ffffff;
-    box-shadow: 0 0 8px #ff4655;
-}
-
-
-select:focus {
-    outline: none;
-    border-color: #ff4655;
-    box-shadow: 0 0 10px #ff4655;
-}
-
-.select-container {
+.conteudo_mapa {
     position: relative;
-    display: inline-block;
+    margin-left: 80px;
 }
 
-.select-container::after {
-    content: "▼";
-    font-size: 12px;
-    color: #ff4655;
-
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-
-    pointer-events: none;
+.img_mapas { 
+    margin: 0 80px; 
 }
 
-/* --- Seção Imagens --*/
 
-.imgs{
-    display: flex;
-    flex-direction: row;
-    gap: 100px;
-
-    margin-bottom: 150px;
+.btn_mapa {
+    margin-top: 50px;
+    text-align: center;
 }
 
-.imgs img{
-    margin: 0;
-}
-
-.nome_personagem{
-    margin: 0;
-    background-color: #B1B1B1;
+ 
+.btn_mapa button {
+    width: 120px;
     padding: 10px;
-    color: black;
-    font-weight: bolder;
-}
-
-.card {
-    width: 400px;
-    height: 500px;
-}
-
-#astra,
-#breach,
-#brimstone,
-#chamber,
-#clove,
-#cypher,
-#deadlock,
-#fade,
-#gekko,
-#harbor,
-#iso,
-#jett,
-#kayo,
-#killjoy,
-#neon,
-#omen,
-#phoenix,
-#raze,
-#reyna,
-#sage,
-#skye,
-#sova,
-#viper,
-#yoru{
-    scroll-margin-top: 150px;
-}
-
-
-.flip-card{
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    perspective: 1000px;
-}
-
-.flip-card-image{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.flip-card-inner{
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transition: 1s;
-    transform-style: preserve-3d;
-}
-
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-.flip-card-back {
-    transform: rotateY(180deg);
-    background: linear-gradient(
-        #1A222D,
-        #373E49
-    );
+    border: white solid 2px;
+    background-color: #a83c49;
     color: white;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.flip-card-back b{
-    color: #a83c49;
-    text-transform: uppercase;
+.btn_mapa button:hover {
+    background-color: #ffffff5f;
+    transform: scale(1.05);
 }
 
-.personagem{
-    margin: 20px;
-    font-size: small;
-}
-
-.flip-card-back,
-.flip-card-front {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-}
-
-.habilidades{
+.conteudo{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin: 0 20px 20px 20px;
+
+    margin-bottom: 100px;
 }
 
-.habilidades p{
-    font-size: small;
+.imagens {
+    width: 90%;
+
+    display: flex;
+    flex-direction: row;
 }
 
-/* --- Footer --*/
+.imagem_principal{
+    width: 60%;
+    
+}
+
+.imagem_mini{
+    width: 40%;
+}
+
+.nome_mapa{
+    margin: 0;
+    width: 90%;
+    padding: 20px;
+
+    background-color: #B1B1B1;
+    color: black;
+
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+/*--- Seção Footer ---*/
 .footer {
     display: flex;
     flex-direction: column;
@@ -365,8 +256,3 @@ select:focus {
     background-color: #a83c49; 
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
-
-
-
-
-
