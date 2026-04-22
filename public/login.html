@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Valorant Universe</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="pag_login">
+        <div class="formulario">
+            <img class="icon" src="../assets/icon/icon2.png" alt="">
+            <div class="input-box">
+                <img class="icon-esq" src="../assets/imgs/icon_email.png" alt="">
+                <input class="campo" type="text" placeholder="Email">
+            </div>
+            <div class="input-box">
+                <img class="icon-esq" src="../assets/imgs/icon_senha.png" alt="">
+                <input id="senha" class="campo" type="password" placeholder="Senha">
+                <img id="olho" class="icon-dir" src="../assets/imgs/icon_olho.png" alt="">
+            </div>
+            <button class="confirmar">ENTRAR</button>
+            <div class="cadastro">
+                <span>Não tem uma conta?</span>
+                <a href="cadastro.html">Cadastre-se</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    let senha = document.getElementById("senha");
+    let olho = document.getElementById("olho");
+
+    function mostrarSenha(){
+        if (senha.type === "password") {
+            senha.type = "text";
+        } else {
+            senha.type = "password";
+        }
+    }
+
+    olho.addEventListener("click", mostrarSenha);
+</script>
+

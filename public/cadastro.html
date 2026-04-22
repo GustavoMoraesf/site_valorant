@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Valorant Universe</title>
+    <link rel="stylesheet" href="css/cadastro.css">
+</head>
+<body>
+    <div class="pag_login">
+        <div class="formulario">
+            <img class="icon" src="../assets/icon/icon2.png" alt="">
+            <div class="input-box">
+                <img class="icon-esq" src="../assets/imgs/icon_user.png" alt="">
+                <input class="campo" type="text" placeholder="Nome">
+            </div>
+            <div class="input-box">
+                <img class="icon-esq" src="../assets/imgs/icon_email.png" alt="">
+                <input class="campo" type="text" placeholder="Email">
+            </div>
+            <div class="input-box">
+                <img class="icon-esq" src="../assets/imgs/icon_senha.png" alt="">
+                <input id="senha" class="campo" type="password" placeholder="Senha">
+                <img id="olho" class="icon-dir" src="../assets/imgs/icon_olho.png" alt="">
+            </div>
+            <div class="input-box">
+                <img class="icon-esq" src="../assets/imgs/icon_senha.png" alt="">
+                <input id="senha2" class="campo" type="password" placeholder="Confirmar Senha">
+                <img id="olho2" class="icon-dir" src="../assets/imgs/icon_olho.png" alt="">
+            </div>
+            <button class="confirmar">CADASTRAR</button>
+            <div class="cadastro">
+                <span>Já tem uma conta?</span>
+                <a href="login.html">Entrar</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    let senha = document.getElementById("senha");
+    let olho = document.getElementById("olho");
+    
+    let senha2 = document.getElementById("senha2");
+    let olho2 = document.getElementById("olho2");
+
+    function mostrarSenha(){
+        if (senha.type === "password") {
+            senha.type = "text";
+        } else {
+            senha.type = "password";
+        }
+    }
+
+    olho.addEventListener("click", mostrarSenha);
+
+    function mostrarSenha2(){
+        if (senha2.type === "password") {
+            senha2.type = "text";
+        } else {
+            senha2.type = "password";
+        }
+    }
+
+    olho2.addEventListener("click", mostrarSenha2);
+</script>
+

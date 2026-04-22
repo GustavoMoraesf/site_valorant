@@ -431,18 +431,42 @@ body {
 #botao_esq img, #botao_dir img {
     width: 100%;
     height: 100%;
+    filter: invert(1);
 }
 
-.info_arsenal{
-    text-align: center;
+.seta_esq{
+    transform: scaleX(-1);
 }
 
-.info_arsenal h1{
-    margin-bottom: 20px;
+.info_arsenal {
+    max-width: 400px;
+    padding: 25px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    text-align: left;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
-.info_arsenal p{
-    width: 200px;
+.info_arsenal .arma {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.info_arsenal .tipo {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #a83c49; 
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.info_arsenal .contexto {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #ccc;
 }
 
 /* --- Seção footer --- */
