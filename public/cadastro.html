@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro | Valorant Universe</title>
     <link rel="stylesheet" href="css/cadastro.css">
+    <script src="./js/sessao.js"></script>
 </head>
 <body>
     <div class="pag_login">
@@ -12,23 +13,24 @@
             <img class="icon" src="../assets/icon/icon2.png" alt="">
             <div class="input-box">
                 <img class="icon-esq" src="../assets/imgs/icon_user.png" alt="">
-                <input class="campo" type="text" placeholder="Nome">
+                <input class="campo" type="text" placeholder="Nome" id="ipt_nome">
             </div>
             <div class="input-box">
                 <img class="icon-esq" src="../assets/imgs/icon_email.png" alt="">
-                <input class="campo" type="text" placeholder="Email">
+                <input class="campo" type="text" placeholder="Email" id="ipt_email">
             </div>
             <div class="input-box">
                 <img class="icon-esq" src="../assets/imgs/icon_senha.png" alt="">
-                <input id="senha" class="campo" type="password" placeholder="Senha">
+                <input class="campo" type="password" placeholder="Senha" id="ipt_senha">
                 <img id="olho" class="icon-dir" src="../assets/imgs/icon_olho.png" alt="">
             </div>
             <div class="input-box">
                 <img class="icon-esq" src="../assets/imgs/icon_senha.png" alt="">
-                <input id="senha2" class="campo" type="password" placeholder="Confirmar Senha">
+                <input class="campo" type="password" placeholder="Confirmar Senha" id="ipt_senha2">
                 <img id="olho2" class="icon-dir" src="../assets/imgs/icon_olho.png" alt="">
             </div>
-            <button class="confirmar">CADASTRAR</button>
+            <button class="confirmar" onclick="cadastrar()">CADASTRAR</button>
+            <div class="mensagem" id="div_msg"></div>
             <div class="cadastro">
                 <span>Já tem uma conta?</span>
                 <a href="login.html">Entrar</a>
@@ -39,30 +41,103 @@
 </html>
 
 <script>
-    let senha = document.getElementById("senha");
+    let senha_olho = document.getElementById("ipt_senha");
     let olho = document.getElementById("olho");
-    
-    let senha2 = document.getElementById("senha2");
+    let senha2_olho = document.getElementById("ipt_senha2");
     let olho2 = document.getElementById("olho2");
 
     function mostrarSenha(){
-        if (senha.type === "password") {
-            senha.type = "text";
+        if (senha_olho.type === "password") {
+            senha_olho.type = "text";
         } else {
-            senha.type = "password";
+            senha_olho.type = "password";
         }
     }
 
     olho.addEventListener("click", mostrarSenha);
 
     function mostrarSenha2(){
-        if (senha2.type === "password") {
-            senha2.type = "text";
+        if (senha2_olho.type === "password") {
+            senha2_olho.type = "text";
         } else {
-            senha2.type = "password";
+            senha2_olho.type = "password";
         }
     }
 
     olho2.addEventListener("click", mostrarSenha2);
+
+
+    function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    let nomeVar = ipt_nome.value
+    let emailVar = ipt_email.value
+    let senhaVar = ipt_senha.value 
+    let senha2Var = ipt_senha2.value
+
+
+    // Verificando se há algum campo em branco
+    if (nomeVar == "" || emailVar == "" || senhaVar == "" || senha2Var == "" ) {
+      div_msg.innerHTML = `Os campos devem ser preechido corretamente`
+      return false
+    } else if (!emailVar.includes('@') || !emailVar.includes('.')){
+      div_msg.innerHTML = `Insira um email válido`
+      return false
+    } else if (senhaVar != senha2Var){
+      div_msg.innerHTML = `As senhas devem ser iguais`
+      return false
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...")
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "1000");
+
+          limparFormulario();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+    
+      return false;
+  }
+
+  
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
+
+  function limparFormulario(){
+    nomeVar.value = ''
+    emailVar.value = ''
+    senhaVar.value = ''
+    senha2Var.value = ''
+  }
 </script>
 

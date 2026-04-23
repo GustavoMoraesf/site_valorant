@@ -109,3 +109,8 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+.mensagem{
+    color: white;
+    font-weight: bolder;
+}

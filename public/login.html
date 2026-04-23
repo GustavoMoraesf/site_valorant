@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Valorant Universe</title>
     <link rel="stylesheet" href="css/login.css">
+    <script src="./js/sessao.js"></script>
 </head>
 <body>
     <div class="pag_login">
@@ -12,14 +13,15 @@
             <img class="icon" src="../assets/icon/icon2.png" alt="">
             <div class="input-box">
                 <img class="icon-esq" src="../assets/imgs/icon_email.png" alt="">
-                <input class="campo" type="text" placeholder="Email">
+                <input class="campo" type="text" placeholder="Email" id="email_input">
             </div>
             <div class="input-box">
                 <img class="icon-esq" src="../assets/imgs/icon_senha.png" alt="">
-                <input id="senha" class="campo" type="password" placeholder="Senha">
+                <input id="senha_input" class="campo" type="password" placeholder="Senha">
                 <img id="olho" class="icon-dir" src="../assets/imgs/icon_olho.png" alt="">
             </div>
-            <button class="confirmar">ENTRAR</button>
+            <button class="confirmar" onclick="entrar()">ENTRAR</button>
+            <div id="div_msg"></div>
             <div class="cadastro">
                 <span>Não tem uma conta?</span>
                 <a href="cadastro.html">Cadastre-se</a>
@@ -30,10 +32,10 @@
 </html>
 
 <script>
-    let senha = document.getElementById("senha");
+    let senha = document.getElementById("senha_input");
     let olho = document.getElementById("olho");
 
-    function mostrarSenha(){
+    function mostrarSenha() {
         if (senha.type === "password") {
             senha.type = "text";
         } else {
@@ -42,5 +44,71 @@
     }
 
     olho.addEventListener("click", mostrarSenha);
+
+    function entrar() {
+
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(function () {
+                        window.location = "./user_login/index.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
 </script>
 
