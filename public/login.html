@@ -21,7 +21,7 @@
                 <img id="olho" class="icon-dir" src="../assets/imgs/icon_olho.png" alt="">
             </div>
             <button class="confirmar" onclick="entrar()">ENTRAR</button>
-            <div id="div_msg"></div>
+            <div style="color: white;" id="div_msg"></div>
             <div class="cadastro">
                 <span>Não tem uma conta?</span>
                 <a href="cadastro.html">Cadastre-se</a>
@@ -51,12 +51,11 @@
         var senhaVar = senha_input.value;
 
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            div_msg.innerHTML = "Preencha todos os campos";
             return false;
         }
         else {
-            setInterval(sumirMensagem, 5000)
+            setInterval(2000)
         }
 
         console.log("FORM LOGIN: ", emailVar);
@@ -91,13 +90,8 @@
                 });
 
             } else {
-
                 console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    finalizarAguardar(texto);
-                });
+                div_msg.innerHTML = "Email e/ou senha inválidos"
             }
 
         }).catch(function (erro) {
@@ -105,10 +99,6 @@
         })
 
         return false;
-    }
-
-    function sumirMensagem() {
-        cardErro.style.display = "none"
     }
 </script>
 

@@ -75,20 +75,46 @@
     let emailVar = ipt_email.value
     let senhaVar = ipt_senha.value 
     let senha2Var = ipt_senha2.value
+    let campos = [nomeVar, emailVar, senhaVar, senha2Var];
+    let temEspecial = false;
+    let especiais = "!@#$%^&*()_+-=[]{}|;:'\",.<>?/";
 
 
-    // Verificando se há algum campo em branco
-    if (nomeVar == "" || emailVar == "" || senhaVar == "" || senha2Var == "" ) {
-      div_msg.innerHTML = `Os campos devem ser preechido corretamente`
-      return false
-    } else if (!emailVar.includes('@') || !emailVar.includes('.')){
-      div_msg.innerHTML = `Insira um email válido`
-      return false
+    for (let i = 0; i < campos.length; i++) {
+      if (campos[i] == "") {
+        div_msg.innerHTML = `<span style="color: red;">Preencha todos os campos</span>`;
+        return false;
+      }
+    }
+
+    for (let i = 0; i < senhaVar.length; i++) {
+      if (especiais.includes(senhaVar[i])) {
+        temEspecial = true;
+        break;
+      }
+    }
+
+    if (!emailVar.includes('@') || !emailVar.includes('.')){
+        div_msg.innerHTML = `Insira um <span style="color: red;"> email válido </span>`
+        return false
+    } else if(senhaVar.length < 8){
+        div_msg.innerHTML = `A senha deve ter no <span style="color: red;"> mínimo 8 caracteres </span>`
+        return false
+    } else if(senhaVar == senhaVar.toUpperCase()){
+        div_msg.innerHTML = `A senha deve ter letras <span style="color: red;"> minúsculas </span>`
+        return false
+    } else if(senhaVar == senhaVar.toLowerCase()){
+        div_msg.innerHTML = `A senha deve ter letras <span style="color: red;"> maiúsculas </span>`
+        return false
+    } else if (!temEspecial) {
+        div_msg.innerHTML = `A senha deve ter pelo menos <span style="color: red;">1 caractere especial</span>`;
+        return false;
     } else if (senhaVar != senha2Var){
-      div_msg.innerHTML = `As senhas devem ser iguais`
-      return false
+        div_msg.innerHTML = `As senhas devem ser <span style="color: red;"> iguais </span>`
+        return false
     } else {
-      setInterval(sumirMensagem, 5000);
+        div_msg.innerHTML = ``
+        setInterval(5000);
     }
 
     // Enviando o valor da nova input
@@ -117,6 +143,7 @@
 
           limparFormulario();
         } else {
+          div_msg.innerHTML = `<span style="color: red;"> Email já cadastrado! </span>`
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
@@ -127,17 +154,12 @@
       return false;
   }
 
-  
-
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-  }
-
   function limparFormulario(){
     nomeVar.value = ''
     emailVar.value = ''
     senhaVar.value = ''
     senha2Var.value = ''
   }
+
 </script>
 
