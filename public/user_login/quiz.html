@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/quiz.css">
+    <title>Quiz | Valorant Universe</title>
+</head>
+<body>
+     <div class="header">
+        <div class="icon">
+            <img src="../assets/icon/icon.png" alt="" />
+        </div>
+        <div class="navbar">
+            <ul class="links">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="agentes.html">Agentes</a>
+                </li>
+                <li>
+                    <a href="mapas.html">Mapas</a>
+                </li>
+                <li>
+                    <a href="index.html#arsenal">Arsenal</a>
+                </li>
+                <li>
+                    <a href="" class="agora">Quiz</a>
+                </li>
+                <li>
+                    <a href="">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+        <div class="login_botao">
+            <a href="#"><button class="btn_entrar">Sair</button></a>
+        </div>
+    </div>
+    <div class="pag_quiz">
+        <div class="pergunta">
+            <p id="txt_pergunta">
+            </p>
+        </div>
+        
+        <div class="respostas">
+            <div class="selecao" id="res1">
+                <p id="txt_resposta1">
+                     
+                </p>
+            </div>
+            <div class="selecao" id="res2">
+                <p id="txt_resposta2">
+                     
+                </p>
+            </div>
+            <div class="selecao" id="res3">
+                <p id="txt_resposta3">
+                     
+                </p>
+            </div>
+            <div class="selecao" id="res4">
+                <p id="txt_resposta4"> 
+                     
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="resultado">
+        <h1 id="titulo_resultado"></h1>
+        <img id="img_resultado" src="" alt="" style="width: 900px; margin: 20px 0;">
+        <p id="desc_resultado"></p>
+    </div>
+
+    <div class="footer">
+        <p>Projeto com fins educacionais • © 2026 Gustavo Moraes</p>
+        <div class="redes_sociais">
+            <a href="https://www.linkedin.com/in/devgustavomoraes/" target="_blank"><img src="../assets/imgs/LinkedIn_logo_initials.png.webp" alt="LinkedIn"></a>
+            <a href="https://github.com/GustavoMoraesf" target="_blank"><img src="../assets/imgs/github-icon-1-logo-black-and-white.png" alt="GitHub"></a>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    window.onload = function() {
+        quiz();
+    };
+
+    function quiz(){
+
+        let listaPerguntas = [
+            '1. Como você prefere começar uma rodada?',
+            '2. Qual dessas frases mais combina com você?',
+            '3. Seu estilo de jogo é mais…',
+            '4. O que você faz quando o time está em desvantagem?',
+            '5. Qual habilidade você acha mais útil?',
+            '6. Em um clutch (1vX), você…',
+            '7. Qual papel você assume naturalmente em jogos em equipe?',
+            '8. Você prefere mapas…',
+            '9. O que te dá mais satisfação?',
+            '10. Como seus amigos te descreveriam?'
+        ];
+
+        let listaResposta1 = [
+            'A) Indo pra cima e buscando o primeiro abate',
+            'A) “Eu entro primeiro, confia.”',
+            'A) Agressivo e rápido',
+            'A) Tenta virar com jogadas ousadas',
+            'A) Mobilidade (dash, salto, etc.)',
+            'A) Vai pra cima sem medo',
+            'A) O protagonista da ação',
+            'A) Com rotas rápidas pra atacar',
+            'A) Fazer várias eliminações',
+            'A) Impulsivo e habilidoso'
+        ];
+
+        let listaResposta2 = [
+            'B) Preparando o terreno com smokes',
+            'B) "Calma, deixa eu organizar o mapa."',
+            'B) Estratégico e calculado',
+            'B) Controla espaço pra recuperar o round',
+            'B) Bloquear visão do inimigo',
+            'B) Usa utilitários pra controlar o mapa',
+            'B) O estrategista',
+            'B) Onde dá pra controlar entradas',
+            'B) Executar um plano perfeito',
+            'B) Inteligente e estratégico'
+        ];
+
+        let listaResposta3 = [
+            'C) Abrindo espaço com utilitários de informação',
+            'C) “Vou cegar eles, entra depois.”',
+            'C) Tático e de suporte',
+            'C) Busca informação antes de agir',
+            'C) Revelar posição inimiga',
+            'C) Tenta pegar info antes de agir',
+            'C) O facilitador',
+            'C) Com várias possibilidades de informação',
+            'C) Ajudar o time a entrar com segurança',
+            'C) Comunicativo e útil'
+        ];
+
+        let listaResposta4 = [
+            'D) Segurando o avanço inimigo',
+            'D) “Relaxa, esse bomb tá seguro.”',
+            'D) Paciente e defensivo',
+            'D) Se posiciona bem pra segurar o avanço',
+            'D) Proteger área ou aliados',
+            'D) Joga no tempo e posicionamento',
+            'D) O defensor',
+            'D) Com pontos fortes pra defesa',
+            'D) Parar o avanço inimigo sozinho',
+            'D) Confiável e consistente'
+        ];
+        
+        let duelista = 0;
+        let controlador = 0;
+        let iniciador = 0;
+        let sentinela = 0;
+
+        let contador = 0;
+
+        let txt_pergunta = document.getElementById('txt_pergunta');
+        let txt_resposta1 = document.getElementById('txt_resposta1');
+        let txt_resposta2 = document.getElementById('txt_resposta2');
+        let txt_resposta3 = document.getElementById('txt_resposta3');
+        let txt_resposta4 = document.getElementById('txt_resposta4');
+
+        let respostaA = document.getElementById('res1');
+        let respostaB = document.getElementById('res2');
+        let respostaC = document.getElementById('res3');
+        let respostaD = document.getElementById('res4');
+
+        function atualizarPergunta() {
+            txt_pergunta.innerHTML = listaPerguntas[contador];
+            txt_resposta1.innerHTML = listaResposta1[contador];
+            txt_resposta2.innerHTML = listaResposta2[contador];
+            txt_resposta3.innerHTML = listaResposta3[contador];
+            txt_resposta4.innerHTML = listaResposta4[contador];
+        }
+
+        function verificarFim() {
+            if (contador >= listaPerguntas.length) {
+
+            let maior = Math.max(duelista, controlador, iniciador, sentinela);
+
+            let resultado = "";
+            let imagem = "";
+            let descricao = "";
+
+            if (maior == duelista) {
+                resultado = "Duelista";
+                imagem = "../assets/imgs/duelistas.jpg";
+                descricao = "Você é agressivo, confiante e gosta de liderar ataques.";
+            } 
+            else if (maior == controlador) {
+                resultado = "Controlador";
+                imagem = "../assets/imgs/controladores.jpg";
+                descricao = "Você domina o mapa e pensa estrategicamente.";
+            } 
+            else if (maior == iniciador) {
+                resultado = "Iniciador";
+                imagem = "../assets/imgs/iniciadores.png";
+                descricao = "Você abre caminho para o time com inteligência.";
+            } 
+            else {
+                resultado = "Sentinela";
+                imagem = "../assets/imgs/sentinelas.webp";
+                descricao = "Você protege o time e controla o território.";
+            }
+
+            document.querySelector('.pag_quiz').style.display = 'none';
+            document.getElementById('resultado').style.display = 'block';
+            document.getElementById('titulo_resultado').innerHTML = "Você é " + resultado + "!";
+            document.getElementById('img_resultado').src = imagem;
+            document.getElementById('desc_resultado').innerHTML = descricao;
+        }
+}
+
+        respostaA.addEventListener('click', function() {
+            duelista++;
+            contador++;
+            verificarFim();
+            if (contador < listaPerguntas.length) {
+                atualizarPergunta();
+            } 
+        });
+
+        respostaB.addEventListener('click', function() {
+            controlador++;
+            contador++;
+            verificarFim();
+            if (contador < listaPerguntas.length) {
+                atualizarPergunta();
+            } 
+        });
+
+        respostaC.addEventListener('click', function() {
+            iniciador++;
+            contador++;
+            verificarFim();
+            if (contador < listaPerguntas.length) {
+                atualizarPergunta();
+            } 
+        });
+
+        respostaD.addEventListener('click', function() {
+            sentinela++;
+            contador++;
+            verificarFim();
+            if (contador < listaPerguntas.length) {
+                atualizarPergunta();
+            } 
+        });
+
+        atualizarPergunta();
+    }
+</script>
