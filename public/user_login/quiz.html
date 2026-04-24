@@ -184,11 +184,40 @@
         function verificarFim() {
             if (contador >= listaPerguntas.length) {
 
-            let maior = Math.max(duelista, controlador, iniciador, sentinela);
+                let maior = Math.max(duelista, controlador, iniciador, sentinela);
 
-            let resultado = "";
-            let imagem = "";
-            let descricao = "";
+                // Enviando o valor da nova input
+                fetch("/quiz/quizPontuacao", {
+                method: "POST", 
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    ptDuelista: duelista,
+                    ptControlador: controlador,
+                    ptIniciador: iniciador,
+                    ptSentinela: sentinela,
+                    fkUser: sessionStorage.ID_USUARIO 
+                }),
+                })
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+
+                    if (resposta.ok) {
+                        console.log('Dados do quiz cadastrados!')
+                    } else {
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                        return false
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+            
+
+                let resultado = "";
+                let imagem = "";
+                let descricao = "";
 
             if (maior == duelista) {
                 resultado = "Duelista";
@@ -257,4 +286,6 @@
 
         atualizarPergunta();
     }
+
+    
 </script>
