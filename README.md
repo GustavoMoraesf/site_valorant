@@ -8,7 +8,8 @@ Instituição: SPTECH 2026
 
 Para a utilização do projeto deve seguir os seguintes passo:
 
-# 1 - Abra o terminal e execute: npm i
+# 1 - Abra o terminal e execute: 
+    npm i
 
 # 2 - Crie um arquivo .env e preencha com os seguintes dados:
 
@@ -52,5 +53,16 @@ Para a utilização do projeto deve seguir os seguintes passo:
     email VARCHAR(45) UNIQUE,
     senha VARCHAR(45));
 
-# 5 - Execute no terminal: npm start
+    CREATE TABLE quiz(
+    idQuiz INT PRIMARY KEY AUTO_INCREMENT,
+    pontosDuelista INT,
+    pontosControlador INT,
+    pontosIniciador INT,
+    pontosSentinela INT,
+    fkUser INT,
+    CONSTRAINT fk_usuario FOREIGN KEY (fkUser) REFERENCES usuario(idUser)
+    );
+
+# 5 - Execute no terminal: 
+    npm start
 
