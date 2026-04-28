@@ -112,6 +112,23 @@ body::before {
     transform: scale(1.05);
 }
 
+.login_user {
+    display: flex;
+    flex-direction: row;
+    margin: 0 40px 0 0;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    gap: 10px;
+}
+
+
+.login_user img{
+    height: 40px;
+    border: white solid 2px;
+    border-radius: 20px;
+}
 
 .pag_quiz{
     display: flex;

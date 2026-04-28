@@ -33,8 +33,9 @@
                 </li>
             </ul>
         </div>
-        <div class="login_botao">
-            <a href="#"><button class="btn_entrar">Sair</button></a>
+        <div class="login_user">
+            <img src="../assets/imgs/fade_icon.webp" alt="">
+            <span id="nome_user">Usuario</span>
         </div>
     </div>
     <div class="pag_quiz">
@@ -87,6 +88,8 @@
     window.onload = function() {
         quiz();
     };
+
+    nome_user.innerHTML = sessionStorage.NOME_USUARIO
 
     function quiz(){
 

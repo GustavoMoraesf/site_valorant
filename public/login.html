@@ -28,6 +28,10 @@
             </div>
         </div>
     </div>
+    <div class="overlay" id="overlay"></div>
+    <div class="pop" id="popup">
+        <img src="../assets/imgs/YouTube_loading_symbol_3_(transparent).gif" alt="" style="width: 100px;">
+    </div>
 </body>
 </html>
 
@@ -44,6 +48,16 @@
     }
 
     olho.addEventListener("click", mostrarSenha);
+
+    function mostrarPopup() {
+        document.getElementById("popup").classList.add("ativo");
+        document.getElementById("overlay").classList.add("ativo");
+    }
+
+    function fecharPopup() {
+        document.getElementById("popup").classList.remove("ativo");
+        document.getElementById("overlay").classList.remove("ativo");
+    }
 
     function entrar() {
 
@@ -74,6 +88,7 @@
             console.log("ESTOU NO THEN DO entrar()!")
 
             if (resposta.ok) {
+                mostrarPopup()
                 console.log(resposta);
 
                 resposta.json().then(json => {
@@ -82,6 +97,11 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.idUser;
+
+
+                    setTimeout(function () {
+                        fecharPopup()
+                    }, 1000); // apenas para exibir o loading
 
                     setTimeout(function () {
                         console.log('vou redirecionar')
