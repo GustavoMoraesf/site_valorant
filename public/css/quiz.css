@@ -126,7 +126,7 @@ body::before {
 
 .login_user img{
     height: 40px;
-    border: white solid 2px;
+    border: #a83c49 solid 2px;
     border-radius: 20px;
 }
 

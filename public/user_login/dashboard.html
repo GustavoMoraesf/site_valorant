@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Valorant Universe</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <div class="header">
+        <div class="icon">
+            <img src="../assets/icon/icon.png" alt="" />
+        </div>
+        <div class="login_user">
+            <img src="../assets/imgs/fade_icon.webp" alt="">
+            <span id="nome_user">Usuario</span>
+        </div>
+        <div class="navbar">
+            <ul class="links">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="agentes.html">Agentes</a>
+                </li>
+                <li>
+                    <a href="mapas.html">Mapas</a>
+                </li>
+                <li>
+                    <a href="index.html#arsenal">Arsenal</a>
+                </li>
+                <li>
+                    <a href="quiz.html">Quiz</a>
+                </li>
+                <li>
+                    <a class="agora"  href="dashboard.html">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="dashboard">
+        <div class="kpis">
+            <div class="kpi1">
+                <h1>Total de usuarios que fizeram o quiz</h1>
+                <span>120</span>
+            </div>
+            <div class="kpi2">
+                <h1>Função mais popular</h1>
+                <span>Duelista</span>
+            </div>  
+            <div class="kpi3">
+                <h1>Distribuição de cada função (%)</h1>
+                <span>120</span>
+            </div>  
+        </div>
+        <div class="graficos">
+            <div class="conteudo1">
+                <div class="dunut">
+                    <h1>Distribuição de Funções dos Usuários</h1>
+                    <canvas id="dunut"></canvas>
+                </div>
+                <div class="barras">
+                  <h1>Comparação de Usuários por Função</h1>
+                    <canvas id="barra"></canvas>
+                </div>
+            </div>
+            <div class="conteudo2">
+                <div class="linha">
+                  <h1>Evolução de Participação no Quiz</h1>
+                  <canvas id="linha"></canvas>
+                </div>
+                <div class="polarArea">
+                  <h1>Nível de Compatibilidade por Função</h1>
+                  <canvas id="polarArea"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  nome_user.innerHTML = sessionStorage.NOME_USUARIO
+
+  const dunut = document.getElementById('dunut');
+
+  new Chart(dunut, {
+    type: 'doughnut',
+    data: {
+      labels: ['Duelista', 'Controlador', 'Iniciador', 'Sentinela'],
+      datasets: [{
+        data: [40, 25, 20, 15],
+        backgroundColor: [
+          '#ffc800',
+          '#4ea1ff',
+          '#050045',
+          '#ff0000'
+        ],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          labels: {
+            color: '#1F2326'
+          }
+        }
+      }
+    }
+  });
+
+  const barra = document.getElementById('barra');
+
+  new Chart(barra, {
+    type: 'bar',
+    data: {
+      labels: ['Duelista', 'Controlador', 'Iniciador', 'Sentinela'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          '#ffc800',
+          '#4ea1ff',
+          '#050045',
+          '#ff0000'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  const linha = document.getElementById('linha');
+
+  new Chart(linha, {
+    type: 'line',
+    data: {
+      labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
+      datasets: [
+        {
+          label: 'Duelista',
+          data: [10, 15, 25, 30, 40],
+          borderColor: '#ff4655',
+          tension: 0.4
+        },
+        {
+          label: 'Controlador',
+          data: [5, 10, 15, 20, 25],
+          borderColor: '#4ea1ff',
+          tension: 0.4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+
+
+  const polarArea = document.getElementById('polarArea');
+
+  new Chart(polarArea, {
+    type: 'polarArea',
+    data: {
+      labels: ['Duelista', 'Controlador', 'Iniciador', 'Sentinela'],
+      datasets: [{
+        data: [40, 25, 20, 15],
+        backgroundColor: [
+          '#ffc800',
+          '#4ea1ff',
+          '#050045',
+          '#ff0000'
+        ],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          labels: {
+            color: '#1F2326'
+          }
+        }
+      }
+    }
+  });
+</script>

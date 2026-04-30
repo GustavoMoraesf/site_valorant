@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+    background-color: #2d3d59;
+}
+
+
+.header {
+    display: flex;
+    flex-direction: column;     
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 30px;
+
+    background-color: #1F2326;
+
+    height: 100vh;
+    width: 170px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 10;
+
+    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+}
+
+
+.icon {
+    margin: 30px 0;
+}
+
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+}
+
+
+.navbar a.agora {
+    color: #a83c49;
+    font-weight: bolder;
+    text-shadow: 0 0 5px #a83c4968, 0 0 10px #a83c4968, 0 0 20px #a83c4968, 0 0 40px #a83c4968;
+    transform: scale(1.05);
+}
+
+
+.navbar li {
+    list-style: none;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+
+.navbar li:hover {
+    color: #fff;
+    text-shadow: 0 0 5px #b4b4b4, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
+    transform: scale(1.05);
+}
+
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.login_botao {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.login_botao button {
+    width: 120px;
+    padding: 8px;
+    border: white solid 2px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.login_botao button:hover {
+    background-color: #ffffff5f;
+    text-shadow: 0 0 5px #b4b4b4, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
+    transform: scale(1.05);
+}
+
+.login_user {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    gap: 10px;
+}
+
+.login_user img {
+    height: 40px;
+    border: #a83c49 solid 2px;
+    border-radius: 20px;
+}
+
+.dashboard {
+    margin-left: 220px;
+    width: calc(100% - 220px);
+    height: 100vh;
+    padding: 20px 40px;
+}
+
+.kpis {
+    display: flex;
+    gap: 25px;
+}
+
+.kpis div {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    transition: 0.3s;
+}
+
+.kpis div:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+}
+
+.kpis h1 {
+    color: #a83c49;
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.kpis span {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1F2326;
+}
+
+.graficos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.conteudo1 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 70px;
+}
+
+.conteudo2 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 70px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.dunut,
+.barras,
+.polarArea,
+.linha {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+}
+
+.dunut {
+    width: 400px;
+    height: 300px;
+}
+
+.dunut h1 {
+    color: #a83c49;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.barras {
+    width: 800px;
+    height: 300px;
+}
+
+.polarArea {
+    width: 300px;
+    height: 300px;
+}
+
+.polarArea h1,
+.linha h1,
+.barras h1,
+.dunut h1 {
+    color: #a83c49;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.linha {
+    width: 800px;
+    height: 300px;
+}
+
+canvas {
+    height: 90% !important;
+}

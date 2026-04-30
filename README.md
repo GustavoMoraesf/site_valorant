@@ -59,6 +59,7 @@ Para a utilização do projeto deve seguir os seguintes passo:
     pontosControlador INT,
     pontosIniciador INT,
     pontosSentinela INT,
+    dtQuiz DATETIME DEFAULT CURRENT_TIMESTAMP,
     fkUser INT,
     CONSTRAINT fk_usuario FOREIGN KEY (fkUser) REFERENCES usuario(idUser)
     );
