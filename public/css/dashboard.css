@@ -137,7 +137,7 @@ body {
     margin-left: 220px;
     width: calc(100% - 220px);
     height: 100vh;
-    padding: 20px 40px;
+    padding: 40px 40px;
 }
 
 .kpis {
@@ -202,7 +202,6 @@ body {
     width: 100%;
     gap: 70px;
     margin-top: 10px;
-    margin-bottom: 50px;
 }
 
 .dunut,
@@ -225,23 +224,18 @@ body {
 
 .dunut {
     width: 400px;
-    height: 300px;
+    height: 320px;
 }
 
-.dunut h1 {
-    color: #a83c49;
-    font-size: 15px;
-    margin-bottom: 15px;
-}
 
 .barras {
     width: 800px;
-    height: 300px;
+    height: 320px;
 }
 
 .polarArea {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 320px;
 }
 
 .polarArea h1,
@@ -255,7 +249,7 @@ body {
 
 .linha {
     width: 800px;
-    height: 300px;
+    height: 320px;
 }
 
 canvas {

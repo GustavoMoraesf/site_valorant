@@ -34,8 +34,19 @@
             </ul>
         </div>
         <div class="login_user">
+            <img src="../assets/imgs/fade_icon.webp" alt="" id="open-btn">
+        </div>
+    </div>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" id="close-btn">&times;</a>
+        <div class="login_user">
             <img src="../assets/imgs/fade_icon.webp" alt="">
-            <span id="nome_user">Usuario</span>
+            <span id="side_user">Usuario</span>
+        </div>
+        <div class="escolhas">
+            <a href="#">Configurações</a>
+            <a href="../index.html">Sair</a>    
         </div>
     </div>
 
@@ -180,5 +191,13 @@
 </html>
 
 <script>
-    nome_user.innerHTML = sessionStorage.NOME_USUARIO
+    side_user.innerHTML = sessionStorage.NOME_USUARIO
+
+    document.getElementById('open-btn').addEventListener('click', function() {
+    document.getElementById('mySidebar').style.width = '280px';
+    });
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+    document.getElementById('mySidebar').style.width = '0';
+    });
 </script>

@@ -11,6 +11,10 @@ html {
     scroll-behavior: smooth;
 }
 
+a {
+  text-decoration: none; 
+  color: inherit;        
+}
 
 body {
     display: flex;
@@ -118,6 +122,10 @@ body {
     height: 40px;
     border: #a83c49 solid 2px;
     border-radius: 20px;
+}
+
+.login_user img:hover{
+    cursor: pointer;
 }
 
 .pag_agentes{
@@ -385,6 +393,86 @@ select:focus {
 }
 
 
+.sidebar {
+  height: 50vh;
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
 
+  background: linear-gradient(180deg, #1F2326, #0f1113);
+  box-shadow: -10px 0 30px rgba(0,0,0,0.6);
+
+  overflow-x: hidden;
+  transition: 0.4s ease;
+  padding-top: 80px;
+  z-index: 10000;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar .login_user {
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+}
+
+.sidebar .login_user img {
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid #a83c49;
+    box-shadow: 0 0 15px #a83c49;
+}
+
+.sidebar .login_user span {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.escolhas{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+}
+
+.sidebar a {
+    color: white;
+    padding: 12px 20px;
+    margin: 10px 0;
+
+    border-radius: 8px;
+    
+
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #a83c49;
+    color: white;
+    transform: translateX(-5px) scale(1.05);
+    box-shadow: 0 0 10px #a83c49, 0 0 20px #a83c4970;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 40px;
+  cursor: pointer;
+  color: white;
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  color: #a83c49;
+  transform: rotate(90deg) scale(1.2);
+}
 
 
