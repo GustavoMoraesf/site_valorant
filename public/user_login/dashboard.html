@@ -83,116 +83,149 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-  nome_user.innerHTML = sessionStorage.NOME_USUARIO
+nome_user.innerHTML = sessionStorage.NOME_USUARIO
 
-  const dunut = document.getElementById('dunut');
+/*  KPI  */
 
-  new Chart(dunut, {
-    type: 'doughnut',
-    data: {
-      labels: ['Duelista', 'Controlador', 'Iniciador', 'Sentinela'],
-      datasets: [{
-        data: [40, 25, 20, 15],
-        backgroundColor: [
-          '#ffc800',
-          '#4ea1ff',
-          '#050045',
-          '#ff0000'
-        ],
-        borderWidth: 0
-      }]
-    },
-    options: {
-      plugins: {
-        legend: {
-          labels: {
-            color: '#1F2326'
-          }
+fetch("/dashboard/total-usuarios")
+.then(res => res.json())
+.then(data => {
+    document.querySelector(".kpi1 span").innerHTML = data[0].total_usuarios
+})
+
+fetch("/dashboard/mais-popular")
+.then(res => res.json())
+.then(data => {
+    document.querySelector(".kpi2 span").innerHTML = data[0].funcao
+})
+
+fetch("/dashboard/distribuicao")
+.then(res => res.json())
+.then(data => {
+    let total = data.map(d =>`${d.funcao}: ` + d.porcentagem + "%").join(" | ")
+    document.querySelector(".kpi3 span").innerHTML = total
+})
+
+
+/*  DONUT  */
+
+fetch("/dashboard/distribuicao-geral")
+.then(res => res.json())
+.then(data => {
+
+    const valores = data[0]
+
+    new Chart(document.getElementById('dunut'), { 
+        type: 'doughnut',
+        data: {
+            labels: ['Duelista', 'Controlador', 'Iniciador', 'Sentinela'],
+            datasets: [{
+                data: [
+                    valores.duelista,
+                    valores.controlador,
+                    valores.iniciador,
+                    valores.sentinela
+                ],
+                backgroundColor: [
+                    '#ffc800',
+                    '#4ea1ff',
+                    '#050045',
+                    '#ff0000'
+                ]
+            }]
         }
-      }
-    }
-  });
+    })
+})
 
-  const barra = document.getElementById('barra');
 
-  new Chart(barra, {
-    type: 'bar',
-    data: {
-      labels: ['Duelista', 'Controlador', 'Iniciador', 'Sentinela'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          '#ffc800',
-          '#4ea1ff',
-          '#050045',
-          '#ff0000'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
+/*  BARRAS  */
 
-  const linha = document.getElementById('linha');
+fetch("/dashboard/usuarios-funcao")
+.then(res => res.json())
+.then(data => {
 
-  new Chart(linha, {
-    type: 'line',
-    data: {
-      labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
-      datasets: [
-        {
-          label: 'Duelista',
-          data: [10, 15, 25, 30, 40],
-          borderColor: '#ff4655',
-          tension: 0.4
+    const labels = data.map(d => d.funcao)
+    const valores = data.map(d => d.total)
+
+    new Chart(document.getElementById('barra'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Usuários',
+                data: valores,
+                backgroundColor: [
+                  '#ffc800',
+                  '#4ea1ff',
+                  '#050045',
+                  '#ff0000'
+                ]
+            }]
         },
-        {
-          label: 'Controlador',
-          data: [5, 10, 15, 20, 25],
-          borderColor: '#4ea1ff',
-          tension: 0.4
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
         }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false
-    }
-  });
+    })
+})
 
 
-  const polarArea = document.getElementById('polarArea');
+/*  LINHA  */
 
-  new Chart(polarArea, {
-    type: 'polarArea',
-    data: {
-      labels: ['Duelista', 'Controlador', 'Iniciador', 'Sentinela'],
-      datasets: [{
-        data: [40, 25, 20, 15],
-        backgroundColor: [
-          '#ffc800',
-          '#4ea1ff',
-          '#050045',
-          '#ff0000'
-        ],
-        borderWidth: 0
-      }]
-    },
-    options: {
-      plugins: {
-        legend: {
-          labels: {
-            color: '#1F2326'
-          }
+fetch("/dashboard/quiz-dia")
+.then(res => res.json())
+.then(data => {
+
+    const labels = data.map(d => d.dia)
+    const valores = data.map(d => d.total)
+
+    new Chart(document.getElementById('linha'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Quiz por dia',
+                data: valores,
+                borderColor: '#4ea1ff',
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
         }
-      }
-    }
-  });
+    })
+})
+
+
+/*  POLAR (USUÁRIO LOGADO)  */
+
+fetch(`/dashboard/compatibilidade/${sessionStorage.ID_USUARIO}`)
+.then(res => res.json())
+.then(data => {
+
+    const valores = data[0]
+
+    new Chart(document.getElementById('polarArea'), {
+        type: 'polarArea',
+        data: {
+            labels: ['Duelista', 'Controlador', 'Iniciador', 'Sentinela'],
+            datasets: [{
+                data: [
+                    valores.pontosDuelista,
+                    valores.pontosControlador,
+                    valores.pontosIniciador,
+                    valores.pontosSentinela
+                ],
+                backgroundColor: [
+                    '#ffc800',
+                    '#4ea1ff',
+                    '#050045',
+                    '#ff0000'
+                ]
+            }]
+        }
+    })
+})
+
 </script>
