@@ -24,7 +24,7 @@ function maisPopular(req, res) {
         });
 }
 
-// KPI - distribuição %
+// KPI - distribuição 
 function distribuicaoFuncao(req, res) {
     dashModel.distribuicaoFuncao()
         .then(function (resultado) {
@@ -36,7 +36,7 @@ function distribuicaoFuncao(req, res) {
         });
 }
 
-// Gráfico - donut/polar
+// Gráfico - donut
 function distribuicaoGeral(req, res) {
     dashModel.distribuicaoGeral()
         .then(function (resultado) {
@@ -72,7 +72,7 @@ function quizDia(req, res) {
         });
 }
 
-// Gráfico - compatibilidade (usuário)
+// Gráfico - compatibilidade 
 function compatibilidade(req, res){
     var idUser = req.params.idUser;
 

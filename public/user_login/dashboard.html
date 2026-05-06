@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Valorant Universe</title>
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="shortcut icon" href="../assets/icon/icon.png" type="image/x-icon">
 </head>
 <body>
     <div class="header">
@@ -102,8 +103,19 @@ fetch("/dashboard/mais-popular")
 fetch("/dashboard/distribuicao")
 .then(res => res.json())
 .then(data => {
-    let total = data.map(d =>`${d.funcao}: ` + d.porcentagem + "%").join(" | ")
-    document.querySelector(".kpi3 span").innerHTML = total
+
+    let total = "";
+
+    for (let i = 0; i < data.length; i++) {
+        total += data[i].funcao + ": " + data[i].porcentagem + "%";
+
+        // evita colocar " | " no final
+        if (i < data.length - 1) {
+            total += " | ";
+        }
+    }
+
+    document.querySelector(".kpi3 span").innerHTML = total;
 })
 
 
@@ -144,8 +156,13 @@ fetch("/dashboard/usuarios-funcao")
 .then(res => res.json())
 .then(data => {
 
-    const labels = data.map(d => d.funcao)
-    const valores = data.map(d => d.total)
+    const labels = [];
+    const valores = [];
+
+    for (let i = 0; i < data.length; i++) {
+        labels.push(data[i].funcao);
+        valores.push(data[i].total);
+    }
 
     new Chart(document.getElementById('barra'), {
         type: 'bar',
@@ -169,15 +186,19 @@ fetch("/dashboard/usuarios-funcao")
     })
 })
 
-
 /*  LINHA  */
 
 fetch("/dashboard/quiz-dia")
 .then(res => res.json())
 .then(data => {
 
-    const labels = data.map(d => d.dia)
-    const valores = data.map(d => d.total)
+    const labels = [];
+    const valores = [];
+
+    for (let i = 0; i < data.length; i++) {
+        labels.push(data[i].dia);
+        valores.push(data[i].total);
+    }
 
     new Chart(document.getElementById('linha'), {
         type: 'line',

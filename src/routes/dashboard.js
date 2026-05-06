@@ -18,7 +18,7 @@ router.get("/distribuicao", function (req, res) {
     dashController.distribuicaoFuncao(req, res);
 });
 
-// Gráfico - distribuição geral (donut/polar)
+// Gráfico - distribuição geral (donut)
 router.get("/distribuicao-geral", function (req, res) {
     dashController.distribuicaoGeral(req, res);
 });

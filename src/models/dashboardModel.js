@@ -139,7 +139,8 @@ function compatibilidade(idUser){
     ORDER BY dtQuiz DESC
     LIMIT 1;
     `
-
+    
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
