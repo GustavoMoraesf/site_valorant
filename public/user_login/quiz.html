@@ -42,11 +42,11 @@
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" id="close-btn">&times;</a>
         <div class="login_user">
-            <img src="../assets/imgs/fade_icon.webp" alt="">
+            <img src="../assets/imgs/fade_icon.webp" alt="" id="side_foto">
             <span id="side_user">Usuario</span>
         </div>
         <div class="escolhas">
-            <a href="#">Configurações</a>
+            <a href="configuracoes.html">Configurações</a>
             <a href="../index.html">Sair</a>    
         </div>
     </div>
@@ -104,6 +104,16 @@
 
     side_user.innerHTML = sessionStorage.NOME_USUARIO
 
+    // Verificando se o usário ja tem foto salva, caso não tenha exibe a foto "Padrão"
+    if (sessionStorage.FOTO_USUARIO == null || sessionStorage.FOTO_USUARIO == "null") {
+        document.getElementById("open-btn").src = "../assets/imgs/icon_padrao.avif";
+        document.getElementById("side_foto").src = "../assets/imgs/icon_padrao.avif";
+    } else {
+        document.getElementById("open-btn").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
+        document.getElementById("side_foto").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
+    }
+
+    // Função para abrir a side bar - width começa em 0 e ao clicar no icone aumenta o width
     document.getElementById('open-btn').addEventListener('click', function() {
     document.getElementById('mySidebar').style.width = '280px';
     });
@@ -179,24 +189,32 @@
             'D) Confiável e consistente'
         ];
         
+        // contadores para cada função
         let duelista = 0;
         let controlador = 0;
         let iniciador = 0;
         let sentinela = 0;
 
+
+        // contador geral
         let contador = 0;
 
+
+        // conteudo das div de pergunta e respostas
         let txt_pergunta = document.getElementById('txt_pergunta');
         let txt_resposta1 = document.getElementById('txt_resposta1');
         let txt_resposta2 = document.getElementById('txt_resposta2');
         let txt_resposta3 = document.getElementById('txt_resposta3');
         let txt_resposta4 = document.getElementById('txt_resposta4');
 
+        // pegando a div toda de resposta
         let respostaA = document.getElementById('res1');
         let respostaB = document.getElementById('res2');
         let respostaC = document.getElementById('res3');
         let respostaD = document.getElementById('res4');
 
+
+        // muda o conteudo da pergunta e das resposta com base na posição do contador geral
         function atualizarPergunta() {
             txt_pergunta.innerHTML = listaPerguntas[contador];
             txt_resposta1.innerHTML = listaResposta1[contador];
@@ -205,12 +223,18 @@
             txt_resposta4.innerHTML = listaResposta4[contador];
         }
 
+
+        // função para verificar o fim das perguntas
+        
         function verificarFim() {
+            // - caso o contador ja seja do tamanho da lista de perguntas ele verifica o maior contador de cada função e salva no banco 
+            //  de dados as pontuações.
             if (contador >= listaPerguntas.length) {
 
                 let maior = Math.max(duelista, controlador, iniciador, sentinela);
 
-                // Enviando o valor da nova input
+
+                // salvando no banco de dados
                 fetch("/quiz/quizPontuacao", {
                 method: "POST", 
                 headers: {
@@ -238,39 +262,46 @@
                     console.log(`#ERRO: ${resposta}`);
                 });
             
-
+                // variaveis auxiliares 
                 let resultado = "";
                 let imagem = "";
                 let descricao = "";
 
-            if (maior == duelista) {
-                resultado = "Duelista";
-                imagem = "../assets/imgs/duelistas.jpg";
-                descricao = "Você é agressivo, confiante e gosta de liderar ataques.";
-            } 
-            else if (maior == controlador) {
-                resultado = "Controlador";
-                imagem = "../assets/imgs/controladores.jpg";
-                descricao = "Você domina o mapa e pensa estrategicamente.";
-            } 
-            else if (maior == iniciador) {
-                resultado = "Iniciador";
-                imagem = "../assets/imgs/iniciadores.png";
-                descricao = "Você abre caminho para o time com inteligência.";
-            } 
-            else {
-                resultado = "Sentinela";
-                imagem = "../assets/imgs/sentinelas.webp";
-                descricao = "Você protege o time e controla o território.";
-            }
+                if (maior == duelista) {
+                    resultado = "Duelista";
+                    imagem = "../assets/imgs/duelistas.jpg";
+                    descricao = "Você é agressivo, confiante e gosta de liderar ataques.";
+                } 
+                else if (maior == controlador) {
+                    resultado = "Controlador";
+                    imagem = "../assets/imgs/controladores.jpg";
+                    descricao = "Você domina o mapa e pensa estrategicamente.";
+                } 
+                else if (maior == iniciador) {
+                    resultado = "Iniciador";
+                    imagem = "../assets/imgs/iniciadores.png";
+                    descricao = "Você abre caminho para o time com inteligência.";
+                } 
+                else {
+                    resultado = "Sentinela";
+                    imagem = "../assets/imgs/sentinelas.webp";
+                    descricao = "Você protege o time e controla o território.";
+                }
 
-            document.querySelector('.pag_quiz').style.display = 'none';
-            document.getElementById('resultado').style.display = 'block';
-            document.getElementById('titulo_resultado').innerHTML = "Você é " + resultado + "!";
-            document.getElementById('img_resultado').src = imagem;
-            document.getElementById('desc_resultado').innerHTML = descricao;
+
+                // oculta a div do quiz com o "none" no display
+                document.querySelector('.pag_quiz').style.display = 'none';
+
+                // mostra a div do resultado
+                document.getElementById('resultado').style.display = 'block';
+
+                // altera o titulo, foto e descrição com base no resultado
+                document.getElementById('titulo_resultado').innerHTML = "Você é " + resultado + "!";
+                document.getElementById('img_resultado').src = imagem;
+                document.getElementById('desc_resultado').innerHTML = descricao;
         }
 }
+
 
         respostaA.addEventListener('click', function() {
             duelista++;

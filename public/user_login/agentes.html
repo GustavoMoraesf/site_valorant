@@ -42,11 +42,11 @@
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" id="close-btn">&times;</a>
         <div class="login_user">
-            <img src="../assets/imgs/fade_icon.webp" alt="">
+            <img src="../assets/imgs/fade_icon.webp" alt="" id="side_foto">
             <span id="side_user">Usuario</span>
         </div>
         <div class="escolhas">
-            <a href="#">Configurações</a>
+            <a href="configuracoes.html">Configurações</a>
             <a href="../index.html">Sair</a>    
         </div>
     </div>
@@ -1425,6 +1425,16 @@
 <script>
     side_user.innerHTML = sessionStorage.NOME_USUARIO
 
+    // Verificando se o usário ja tem foto salva, caso não tenha exibe a foto "Padrão"
+    if (sessionStorage.FOTO_USUARIO == null || sessionStorage.FOTO_USUARIO == "null") {
+        document.getElementById("open-btn").src = "../assets/imgs/icon_padrao.avif";
+        document.getElementById("side_foto").src = "../assets/imgs/icon_padrao.avif";
+    } else {
+        document.getElementById("open-btn").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
+        document.getElementById("side_foto").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
+    }
+
+     // Função para abrir a side bar - width começa em 0 e ao clicar no icone aumenta o width
     document.getElementById('open-btn').addEventListener('click', function() {
     document.getElementById('mySidebar').style.width = '280px';
     });
@@ -1434,8 +1444,10 @@
     });
 
     function irParaAgentes() {
+        // recupera o valor do select 
         let valor = agentes.value;
 
+        // desce até o o elemento "deslizando"
         document.getElementById(valor).scrollIntoView({
                 behavior: "smooth"
         });

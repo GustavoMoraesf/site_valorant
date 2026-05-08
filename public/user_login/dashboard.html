@@ -13,7 +13,7 @@
             <img src="../assets/icon/icon.png" alt="" />
         </div>
         <div class="login_user">
-            <img src="../assets/imgs/fade_icon.webp" alt="">
+            <img src="../assets/imgs/fade_icon.webp" alt="" id="foto_user">
             <span id="nome_user">Usuario</span>
         </div>
         <div class="navbar">
@@ -86,8 +86,14 @@
 <script>
 nome_user.innerHTML = sessionStorage.NOME_USUARIO
 
-/*  KPI  */
+// Verificando se o usário ja tem foto salva, caso não tenha exibe a foto "Padrão"
+    if (sessionStorage.FOTO_USUARIO == null || sessionStorage.FOTO_USUARIO == "null") {
+        document.getElementById("foto_user").src = "../assets/imgs/icon_padrao.avif";
+    } else {
+        document.getElementById("foto_user").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
+    }
 
+/*  KPI  */
 fetch("/dashboard/total-usuarios")
 .then(res => res.json())
 .then(data => {
@@ -105,7 +111,7 @@ fetch("/dashboard/distribuicao")
 .then(data => {
 
     let total = "";
-
+    // formatando o texto
     for (let i = 0; i < data.length; i++) {
         total += data[i].funcao + ": " + data[i].porcentagem + "%";
 
@@ -220,7 +226,6 @@ fetch("/dashboard/quiz-dia")
 
 
 /*  POLAR (USUÁRIO LOGADO)  */
-
 fetch(`/dashboard/compatibilidade/${sessionStorage.ID_USUARIO}`)
 .then(res => res.json())
 .then(data => {

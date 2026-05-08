@@ -37,7 +37,7 @@
             </ul>
         </div>
         <div class="login_user">
-            <img src="../assets/imgs/fade_icon.webp" alt="" id="open-btn">
+            <img src="../assets/imgs/icon_padrao.avif" alt="" id="open-btn">
         </div>
     </div>
 
@@ -45,12 +45,12 @@
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" id="close-btn">&times;</a>
         <div class="login_user">
-            <img src="../assets/imgs/fade_icon.webp" alt="">
+            <img src="../assets/imgs/icon_padrao.avif" alt="" id="side_foto">
             <span id="side_user">Usuario</span>
         </div>
         <div class="escolhas">
             <hr>
-            <a href="#">Configurações</a>
+            <a href="configuracoes.html">Configurações</a>
             <a href="../index.html">Sair</a>    
         </div>
     </div>
@@ -207,8 +207,20 @@
 </html>
 
 <script>
+    // Mostrando o nome de usário na sidebar 
     side_user.innerHTML = sessionStorage.NOME_USUARIO
+    
 
+    // Verificando se o usário ja tem foto salva, caso não tenha exibe a foto "Padrão"
+    if (sessionStorage.FOTO_USUARIO == null || sessionStorage.FOTO_USUARIO == "null") {
+        document.getElementById("open-btn").src = "../assets/imgs/icon_padrao.avif";
+        document.getElementById("side_foto").src = "../assets/imgs/icon_padrao.avif";
+    } else {
+        document.getElementById("open-btn").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
+        document.getElementById("side_foto").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
+    }
+
+    // Função para abrir a side bar - width começa em 0 e ao clicar no icone aumenta o width
     document.getElementById('open-btn').addEventListener('click', function() {
     document.getElementById('mySidebar').style.width = '280px';
     });
@@ -218,6 +230,7 @@
     });
 
 
+    // Função para o carrossel da página
     let slider = document.querySelectorAll(".slider") //Retorna uma NodeList (tipo uma array) com todos os elementos que têm a classe .slider.
     let arma = document.getElementById('arma')
     let tipo = document.getElementById('tipo')
@@ -278,23 +291,28 @@
         'Esta arma dá um show nas mãos de atiradores pacientes.'
     ]
 
-
+    // percorre a lista removendo a classe on
     function esconderSlider() {
         for(let i = 0; i < slider.length; i++) {
             slider[i].classList.remove("on");
         }
     }
 
+    // adiciona a lista no slide atual com base no contador
     function mostrarSlider() {
         slider[slideAtual].classList.add("on");
     }
 
+    
     function proxSlider() {
         esconderSlider()
 
+        // verifica se já atingiu o tamanho da lista 
         if (slideAtual == slider.length - 1) {
+            // caso a lista tenha chegada ao fim ela volta para o começo
             slideAtual = 0
         } else {
+            // caso a lista não tenha chegada ao fim o contador aumenta mudando o slide
             slideAtual++
         }
         mostrarSlider()
@@ -304,26 +322,24 @@
     function anteriorSlider() {
         esconderSlider();
 
+        // verifica se a lista está no começo
         if (slideAtual == 0) {
+            //caso a lista estiver no começo ele define o contador para o ultimo item da lista
             slideAtual = slider.length - 1
         } else {
+            // se a lista não estiver no começo ele volta um slide
             slideAtual--
         }
         mostrarSlider()
         mudarTexto()
     }
 
+    // muda o conteudo do nome, tipo e descrição da atma com base na posição do contador
     function mudarTexto(){
         arma.innerHTML = listaArmas[slideAtual]
         tipo.innerHTML = `Tipo: ${listaTipo[slideAtual]}`
         contexto.innerHTML = listaContexto[slideAtual]
     }
 
-    function irParaSecao() {
-        let valor = agentes.value;
 
-        document.getElementById(valor).scrollIntoView({
-                behavior: "smooth"
-        });
-    }
 </script>

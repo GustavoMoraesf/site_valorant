@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações | Valorant Universe</title>
+    <link rel="shortcut icon" href="../assets/icon/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/configoracoes.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="icon">
+            <img src="../assets/icon/icon.png" alt="" />
+        </div>
+        <div class="navbar">
+            <ul class="links">
+                <li>
+                    <a href="index.html">Voltar</a>
+                </li>
+            </ul>
+        </div>
+        <div class="login_user">
+            <img src="../assets/imgs/fade_icon.webp" alt="" id="open-btn">
+        </div>
+    </div>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" id="close-btn">&times;</a>
+        <div class="login_user">
+            <img src="../assets/imgs/fade_icon.webp" alt="" id="side_foto">
+            <span id="side_user">Usuario</span>
+        </div>
+        <div class="escolhas">
+            <hr>
+            <a href="#">Configurações</a>
+            <a href="../index.html">Sair</a>    
+        </div>
+    </div>
+
+    <div class="pag_config">
+        <div class="alteracoes">
+            <div class="iptUser">
+                <p>Nome de usuário</p>
+                <input type="text" id="ipt_novoNome" placeholder="">
+                <button>Alterar Nome</button>
+            </div>
+            <div class="iptSenha">
+                <p>Alterar senha</p>
+                <input type="text" id="ipt_senhaAtual" placeholder="Senha atual">
+                <input type="text" id="ipt_senhaNova" placeholder="Senha Nova">
+                <input type="text" id="ipt_senhaNovaConfirmacao" placeholder="Confirme a senha">
+                <button>Alterar Senha</button>
+            </div>
+        </div>
+
+
+        <div class="fotos_config">
+            <p>Imagem de perfil</p>
+    
+            <div class="fotos">
+                <img src="../assets/imgs/icon_fade.webp" onclick="selecionarFoto(this, 'icon_fade.webp')"> <!-- O this significa o próprio elemento HTML, ou seja ao ser clicado ele envia ele mesmo e o segundo parametro para a função-->
+                <img src="../assets/imgs/icon_jett.webp" onclick="selecionarFoto(this, 'icon_jett.webp')">
+                <img src="../assets/imgs/icon_sova.png" onclick="selecionarFoto(this, 'icon_sova.png')">
+                <img src="../assets/imgs/icon_omen.webp" onclick="selecionarFoto(this, 'icon_omen.webp')">
+                <img src="../assets/imgs/icon_reyna.webp" onclick="selecionarFoto(this, 'icon_reyna.webp')">
+                <img src="../assets/imgs/ico_cypher.webp" onclick="selecionarFoto(this, 'ico_cypher.webp')">
+                <img src="../assets/imgs/icon_chamber.png" onclick="selecionarFoto(this, 'icon_chamber.png')">
+                <img src="../assets/imgs/icon_gekko.webp" onclick="selecionarFoto(this, 'icon_gekko.webp')">
+                <img src="../assets/imgs/icon_killjoy.webp" onclick="selecionarFoto(this, 'icon_killjoy.webp')">
+                <img src="../assets/imgs/icon_raze.webp" onclick="selecionarFoto(this, 'icon_raze.webp')">
+                <img src="../assets/imgs/icon_sagewebp.webp" onclick="selecionarFoto(this, 'icon_sagewebp.webp')">
+                <img src="../assets/imgs/icon_astra.webp" onclick="selecionarFoto(this, 'icon_astra.webp')">
+            </div>
+
+            <button onclick="salvarFoto()">Alterar Foto</button>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
+
+
+<script>
+    // adicionando o nome do usuario no campos da sidebar e do input de alterar nome 
+    side_user.innerHTML = sessionStorage.NOME_USUARIO
+    ipt_novoNome.value = sessionStorage.NOME_USUARIO
+    
+    if (sessionStorage.FOTO_USUARIO == null || sessionStorage.FOTO_USUARIO == "null") {
+        document.getElementById("open-btn").src = "../assets/imgs/icon_padrao.avif";
+        document.getElementById("side_foto").src = "../assets/imgs/icon_padrao.avif";
+    } else {
+        document.getElementById("open-btn").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
+        document.getElementById("side_foto").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
+    }
+
+    // Função para abrir a side bar - width começa em 0 e ao clicar no icone aumenta o width
+    document.getElementById('open-btn').addEventListener('click', function() {
+    document.getElementById('mySidebar').style.width = '280px';
+    });
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+    document.getElementById('mySidebar').style.width = '0';
+    });
+
+    // variavel auxiliar
+    let fotoEscolhida = "";
+
+    function selecionarFoto(imgSelecionada, foto) {
+        // salva a variavel da foto escolhida
+        fotoEscolhida = foto;
+
+        // laço de repedição percorrendo todas as fotos e removendo o efeito 
+        let lista = document.querySelectorAll(".fotos img")
+
+        // percorre a lista removendo o efeito de selecionada
+        for(let i = 0; i < lista.length; i++) {
+            lista[i].classList.remove("foto-selecionada");
+        }
+
+        // aplica um efeito mostrando na foto clicada
+        imgSelecionada.classList.add("foto-selecionada");
+    }
+
+    function salvarFoto() {
+        // salva a foto do banco de dados dando um update
+        fetch(`/config/atualizar-foto/${sessionStorage.ID_USUARIO}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                foto: fotoEscolhida
+            })
+        })
+        .then(res => res.json())
+        .then(() => {
+
+            // Atualiza o sessionStorage
+            sessionStorage.FOTO_USUARIO = fotoEscolhida;
+
+            // Atualiza as imagens automaticamente
+            document.getElementById("open-btn").src = `/assets/imgs/${fotoEscolhida}`;
+
+            document.getElementById("side_foto").src = `/assets/imgs/${fotoEscolhida}`;
+
+            alert("Foto atualizada!");
+        });
+}
+</script>
