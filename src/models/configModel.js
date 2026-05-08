@@ -9,7 +9,28 @@ function atualizarFoto(idUser, foto) {
     return database.executar(instrucaoSql);
 }
 
+function atualizarNome(idUser, novoNome){
+    var instrucaoSql = `
+        UPDATE usuario 
+        SET nome = '${novoNome}'
+        WHERE idUser = ${idUser};
+    `;
+    return database.executar(instrucaoSql);
+}
+
+function atualizarSenha(idUser, novaSenha){
+    var instrucaoSql = `
+        UPDATE usuario 
+        SET senha = '${novaSenha}'
+        WHERE idUser = ${idUser};
+    `;
+    return database.executar(instrucaoSql);
+}
+
+
 
 module.exports = {
-    atualizarFoto
+    atualizarFoto,
+    atualizarNome,
+    atualizarSenha
 }

@@ -44,17 +44,32 @@
             <div class="iptUser">
                 <p>Nome de usuário</p>
                 <input type="text" id="ipt_novoNome" placeholder="">
-                <button>Alterar Nome</button>
+                <button onclick="atualizarNome()">Alterar Nome</button>
             </div>
             <div class="iptSenha">
-                <p>Alterar senha</p>
-                <input type="text" id="ipt_senhaAtual" placeholder="Senha atual">
-                <input type="text" id="ipt_senhaNova" placeholder="Senha Nova">
-                <input type="text" id="ipt_senhaNovaConfirmacao" placeholder="Confirme a senha">
-                <button>Alterar Senha</button>
-            </div>
+                <div class="formulario">
+                    <p>Alterar senha</p>
+                    <div class="input-box">
+                        <img class="icon-esq" src="../assets/imgs/icon_senha.png" alt="">
+                        <input class="campo" type="password" placeholder="Senha Atual" id="ipt_senhaAtual">
+                        <img id="olho" class="icon-dir" src="../assets/imgs/icon_olho.png" alt="">
+                    </div>
+                    <div class="input-box">
+                        <img class="icon-esq" src="../assets/imgs/icon_senha.png" alt="">
+                        <input class="campo" type="password" placeholder="Senha Nova" id="ipt_senhaNova">
+                        <img id="olho2" class="icon-dir" src="../assets/imgs/icon_olho.png" alt="">
+                    </div>
+                    <div class="input-box">
+                        <img class="icon-esq" src="../assets/imgs/icon_senha.png" alt="">
+                        <input class="campo" type="password" placeholder="Confirmar Senha" id="ipt_senhaNovaConfirmacao">
+                        <img id="olho3" class="icon-dir" src="../assets/imgs/icon_olho.png" alt="">
+                    </div>
+                    
+                </div>
+                <div class="mensagem" id="div_msg"></div>
+                <button onclick="atualizarSenha()">Alterar Senha</button>
         </div>
-
+        </div>
 
         <div class="fotos_config">
             <p>Imagem de perfil</p>
@@ -106,6 +121,46 @@
     document.getElementById('mySidebar').style.width = '0';
     });
 
+
+    let senha_olho = document.getElementById("ipt_senhaAtual");
+    let olho = document.getElementById("olho");
+
+    let senha2_olho = document.getElementById("ipt_senhaNova");
+    let olho2 = document.getElementById("olho2");
+
+    let senha3_olho = document.getElementById("ipt_senhaNovaConfirmacao");
+    let olho3 = document.getElementById("olho3");
+
+    function mostrarSenha(){
+        if (senha_olho.type === "password") {
+            senha_olho.type = "text";
+        } else {
+            senha_olho.type = "password";
+        }
+    }
+
+    olho.addEventListener("click", mostrarSenha);
+
+    function mostrarSenha2(){
+        if (senha2_olho.type === "password") {
+            senha2_olho.type = "text";
+        } else {
+            senha2_olho.type = "password";
+        }
+    }
+
+    olho2.addEventListener("click", mostrarSenha2);
+
+    function mostrarSenha3(){
+        if (senha3_olho.type === "password") {
+            senha3_olho.type = "text";
+        } else {
+            senha3_olho.type = "password";
+        }
+    }
+
+    olho3.addEventListener("click", mostrarSenha3);
+
     // variavel auxiliar
     let fotoEscolhida = "";
 
@@ -149,5 +204,99 @@
 
             alert("Foto atualizada!");
         });
-}
+    }
+
+    function atualizarNome(){
+        let novoNome = ipt_novoNome.value
+
+        fetch(`/config/atualizar-nome/${sessionStorage.ID_USUARIO}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nome: novoNome
+            })
+        })
+        .then(res => res.json())
+        .then(() => {
+
+            // Atualiza o sessionStorage
+            sessionStorage.NOME_USUARIO = novoNome;
+
+            // Atualiza as imagens automaticamente
+            ipt_novoNome.value = sessionStorage.NOME_USUARIO
+            side_user.innerHTML = sessionStorage.NOME_USUARIO
+
+            alert("Nome atualizado!");
+            console.log(novoNome)
+        });
+
+    }
+
+    function atualizarSenha(){
+        let senhaAtual = ipt_senhaAtual.value
+        let senhaNova = ipt_senhaNova.value
+        let senhaNova2 = ipt_senhaNovaConfirmacao.value
+        let campos = [senhaAtual, senhaNova, senhaNova2];
+        let temEspecial = false;
+        let especiais = "!@#$%^&*()_+-=[]{}|;:'\",.<>?/";
+
+
+        for (let i = 0; i < campos.length; i++) {
+            if (campos[i] == "") {
+                div_msg.innerHTML = `<span style="color: red;">Preencha todos os campos</span>`;
+                return false;
+            }
+        }
+
+        for (let i = 0; i < senhaNova.length; i++) {
+            if (especiais.includes(senhaNova[i])) {
+                temEspecial = true;
+                break;
+            }
+        }
+
+
+        if(senhaAtual != sessionStorage.SENHA_USUARIO){
+            div_msg.innerHTML = 'Senha atual <span style="color: red;"> Incorreta </span>'
+        } else if(senhaNova.length < 8){
+            div_msg.innerHTML = `A senha deve ter no <span style="color: red;"> mínimo 8 caracteres </span>`
+            return false
+        } else if(senhaNova == senhaNova.toUpperCase()){
+            div_msg.innerHTML = `A senha deve ter letras <span style="color: red;"> minúsculas </span>`
+            return false
+        } else if(senhaNova == senhaNova.toLowerCase()){
+            div_msg.innerHTML = `A senha deve ter letras <span style="color: red;"> maiúsculas </span>`
+            return false
+        } else if (!temEspecial) {
+            div_msg.innerHTML = `A senha deve ter pelo menos <span style="color: red;">1 caractere especial</span>`;
+            return false;
+        } else if (senhaNova != senhaNova2){
+            div_msg.innerHTML = `As senhas devem ser <span style="color: red;"> iguais </span>`
+            return false
+        } else{
+            div_msg.innerHTML = ''
+            ipt_senhaAtual.value = ''
+            ipt_senhaNova.value = ''
+            ipt_senhaNovaConfirmacao.value = ''
+            
+            fetch(`/config/atualizar-senha/${sessionStorage.ID_USUARIO}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    senha: senhaNova
+                })
+            })
+            .then(res => res.json())
+            .then(() => {
+
+                alert("Senha Atualizada");
+                console.log(senhaNova)
+            });
+
+        }
+    }
 </script>
