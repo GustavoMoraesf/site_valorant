@@ -40,37 +40,6 @@ function maisPopular(){
     return database.executar(instrucaoSql);
 }
 
-function distribuicaoFuncao(){
-    var instrucaoSql = `
-    SELECT 
-        funcao,
-        ROUND(COUNT(*) * 100.0 / NULLIF((SELECT COUNT(*) FROM quiz), 0), 2) AS porcentagem
-    FROM (
-        SELECT 
-            CASE 
-                WHEN pontosDuelista >= pontosControlador 
-                AND pontosDuelista >= pontosIniciador 
-                AND pontosDuelista >= pontosSentinela THEN 'Duelista'
-                
-                WHEN pontosControlador >= pontosDuelista 
-                AND pontosControlador >= pontosIniciador 
-                AND pontosControlador >= pontosSentinela THEN 'Controlador'
-                
-                WHEN pontosIniciador >= pontosDuelista 
-                AND pontosIniciador >= pontosControlador 
-                AND pontosIniciador >= pontosSentinela THEN 'Iniciador'
-                
-                ELSE 'Sentinela'
-            END AS funcao
-        FROM quiz
-    ) AS resultado
-    GROUP BY funcao;
-    `
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
 function distribuicaoGeral(){
     var instrucaoSql = `
     SELECT 
@@ -149,7 +118,6 @@ function compatibilidade(idUser){
 module.exports = {
     totalUsuarios,
     maisPopular,
-    distribuicaoFuncao,
     distribuicaoGeral,
     usuariosFuncao,
     quizDia,

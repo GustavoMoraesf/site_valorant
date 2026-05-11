@@ -24,18 +24,6 @@ function maisPopular(req, res) {
         });
 }
 
-// KPI - distribuição 
-function distribuicaoFuncao(req, res) {
-    dashModel.distribuicaoFuncao()
-        .then(function (resultado) {
-            res.status(200).json(resultado);
-        })
-        .catch(function (erro) {
-            console.log(erro);
-            res.status(500).json(erro.sqlMessage);
-        });
-}
-
 // Gráfico - donut
 function distribuicaoGeral(req, res) {
     dashModel.distribuicaoGeral()
@@ -93,7 +81,6 @@ function compatibilidade(req, res){
 module.exports = {
     totalUsuarios,
     maisPopular,
-    distribuicaoFuncao,
     distribuicaoGeral,
     usuariosFuncao,
     quizDia,

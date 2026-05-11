@@ -13,10 +13,6 @@ router.get("/mais-popular", function (req, res) {
     dashController.maisPopular(req, res);
 });
 
-// KPI - distribuição %
-router.get("/distribuicao", function (req, res) {
-    dashController.distribuicaoFuncao(req, res);
-});
 
 // Gráfico - distribuição geral (donut)
 router.get("/distribuicao-geral", function (req, res) {
