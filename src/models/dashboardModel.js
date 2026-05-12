@@ -85,11 +85,14 @@ function usuariosFuncao(){
 function quizDia(){
     var instrucaoSql = `
     SELECT 
-        DATE(dtQuiz) AS dia,
+        DATE_FORMAT(dtQuiz, '%d/%m/%Y') AS dia, 
         COUNT(*) AS total
-    FROM quiz
-    GROUP BY DATE(dtQuiz)
-    ORDER BY dia;
+    FROM 
+        quiz
+    GROUP BY 
+        dia
+    ORDER BY 
+        dia;
     `
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
