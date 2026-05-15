@@ -45,11 +45,11 @@
         <div class="kpis">
             <div class="kpi1">
                 <h1>Total de usuarios que fizeram o quiz</h1>
-                <span>120</span>
+                <span id="total_user"></span>
             </div>
             <div class="kpi2">
                 <h1>Função mais popular</h1>
-                <span>Duelista</span>
+                <span id="func_popular"></span>
             </div>
         </div>
         <div class="graficos">
@@ -69,7 +69,7 @@
                     <canvas id="linha"></canvas>
                 </div>
                 <div class="polarArea">
-                    <h1>Nível de Compatibilidade por Função</h1>
+                    <h1>Seu Nível de Compatibilidade por Função (%)</h1>
                     <canvas id="polarArea"></canvas>
                 </div>
             </div>
@@ -95,22 +95,22 @@
     /*  KPI  */
     fetch("/dashboard/total-usuarios")
         .then(res => res.json())
-        .then(data => {
-            document.querySelector(".kpi1 span").innerHTML = data[0].total_usuarios
+        .then(dados => {
+            total_user.innerHTML = dados[0].total_usuarios
         })
 
     fetch("/dashboard/mais-popular")
         .then(res => res.json())
-        .then(data => {
-            document.querySelector(".kpi2 span").innerHTML = data[0].funcao
+        .then(dados => {
+            func_popular.innerHTML = dados[0].funcao
         })
 
     /*  DONUT  */
     fetch("/dashboard/distribuicao-geral")
         .then(res => res.json())
-        .then(data => {
+        .then(dados => {
 
-            let valores = data[0]
+            let valores = dados[0]
 
             new Chart(document.getElementById('dunut'), {
                 type: 'doughnut',
@@ -138,14 +138,14 @@
     /*  BARRAS  */
     fetch("/dashboard/usuarios-funcao")
         .then(res => res.json())
-        .then(data => {
+        .then(dados => {
 
             let labels = [];
             let valores = [];
 
-            for (let i = 0; i < data.length; i++) {
-                labels.push(data[i].funcao);
-                valores.push(data[i].total);
+            for (let i = 0; i < dados.length; i++) {
+                labels.push(dados[i].funcao);
+                valores.push(dados[i].total);
             }
 
             new Chart(document.getElementById('barra'), {
@@ -173,14 +173,14 @@
     /*  LINHA  */
     fetch("/dashboard/quiz-dia")
         .then(res => res.json())
-        .then(data => {
+        .then(dados => {
 
             let labels = [];
             let valores = [];
 
-            for (let i = 0; i < data.length; i++) {
-                labels.push(data[i].dia);
-                valores.push(data[i].total);
+            for (let i = 0; i < dados.length; i++) {
+                labels.push(dados[i].dia);
+                valores.push(dados[i].total);
             }
 
             new Chart(document.getElementById('linha'), {
@@ -205,9 +205,12 @@
     /*  POLAR (USUÁRIO LOGADO)  */
     fetch(`/dashboard/compatibilidade/${sessionStorage.ID_USUARIO}`)
         .then(res => res.json())
-        .then(data => {
+        .then(dados => {
 
-            let valores = data[0]
+            let valoresDuel = (dados[0].pontosDuelista / 10) * 100
+            let valoresContro = (dados[0].pontosControlador / 10) * 100
+            let valoresIni = (dados[0].pontosIniciador / 10) * 100
+            let valoresSent = (dados[0].pontosSentinela / 10) * 100
 
             new Chart(document.getElementById('polarArea'), {
                 type: 'polarArea',
@@ -215,10 +218,10 @@
                     labels: ['Duelista', 'Controlador', 'Iniciador', 'Sentinela'],
                     datasets: [{
                         data: [
-                            valores.pontosDuelista,
-                            valores.pontosControlador,
-                            valores.pontosIniciador,
-                            valores.pontosSentinela
+                            valoresDuel,
+                            valoresContro,
+                            valoresIni,
+                            valoresSent
                         ],
                         backgroundColor: [
                             '#ffc800',

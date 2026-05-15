@@ -1,8 +1,9 @@
 var database = require("../database/config");
 
 function totalUsuarios(){
-    var instrucaoSql = `SELECT COUNT(*) AS total_usuarios
-                        FROM quiz;`
+    var instrucaoSql = `
+    SELECT COUNT(*) AS total_usuarios
+    FROM quiz;`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -87,12 +88,9 @@ function quizDia(){
     SELECT 
         DATE_FORMAT(dtQuiz, '%d/%m/%Y') AS dia, 
         COUNT(*) AS total
-    FROM 
-        quiz
-    GROUP BY 
-        dia
-    ORDER BY 
-        dia;
+    FROM quiz
+    GROUP BY dia
+    ORDER BY dia;
     `
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
