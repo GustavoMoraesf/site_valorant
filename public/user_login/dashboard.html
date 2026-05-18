@@ -56,7 +56,7 @@
             <div class="conteudo1">
                 <div class="dunut">
                     <h1>Distribuição de Funções dos Usuários</h1>
-                    <canvas id="dunut"></canvas>
+                    <canvas id="donut"></canvas>
                 </div>
                 <div class="barras">
                     <h1>Comparação de Usuários por Função</h1>
@@ -83,6 +83,15 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+    window.onload = function () {
+        kpiTotalUsuario();
+        kpiFuncaoPopular();
+        graficoDistribuicaoGeral();
+        graficoUsuarioFuncao();
+        graficoQuizDia();
+        graficoCompatibilidadeUsuario();
+    };
+
     nome_user.innerHTML = sessionStorage.NOME_USUARIO
 
     // Verificando se o usário ja tem foto salva, caso não tenha exibe a foto "Padrão"
@@ -92,27 +101,60 @@
         document.getElementById("foto_user").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
     }
 
-    /*  KPI  */
-    fetch("/dashboard/total-usuarios")
-        .then(res => res.json())
-        .then(dados => {
+    function kpiTotalUsuario(){
+        /*  KPI  */
+        fetch("/dashboard/total-usuarios", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function(res){
+            return res.json();
+
+        }).then(function(dados) {
             total_user.innerHTML = dados[0].total_usuarios
-        })
 
-    fetch("/dashboard/mais-popular")
-        .then(res => res.json())
-        .then(dados => {
+        }).catch(function(erro) {
+            console.log("Erro:", erro);
+
+        });
+    }
+
+
+    function kpiFuncaoPopular(){
+        fetch("/dashboard/mais-popular", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function(res){
+            return res.json();
+
+        }).then(function(dados) {
             func_popular.innerHTML = dados[0].funcao
-        })
 
-    /*  DONUT  */
-    fetch("/dashboard/distribuicao-geral")
-        .then(res => res.json())
-        .then(dados => {
+        }).catch(function(erro) {
+            console.log("Erro:", erro);
+            
+        });
+    }
 
+
+    function graficoDistribuicaoGeral(){
+        /*  DONUT  */
+        fetch("/dashboard/distribuicao-geral", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function(res){
+            return res.json();
+
+        }).then(function(dados) {
+    
             let valores = dados[0]
-
-            new Chart(document.getElementById('dunut'), {
+    
+            new Chart(document.getElementById('donut'), {
                 type: 'doughnut',
                 data: {
                     labels: ['Duelista', 'Controlador', 'Iniciador', 'Sentinela'],
@@ -132,22 +174,33 @@
                     }]
                 }
             })
-        })
 
+        }).catch(function(erro) {
+            console.log("Erro:", erro);
+            
+        });
+    }
 
-    /*  BARRAS  */
-    fetch("/dashboard/usuarios-funcao")
-        .then(res => res.json())
-        .then(dados => {
+    function graficoUsuarioFuncao(){
+        /*  BARRAS  */
+        fetch("/dashboard/usuarios-funcao", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function(res){
+            return res.json();
 
+        }).then(function(dados) {
+    
             let labels = [];
             let valores = [];
-
+    
             for (let i = 0; i < dados.length; i++) {
                 labels.push(dados[i].funcao);
                 valores.push(dados[i].total);
             }
-
+    
             new Chart(document.getElementById('barra'), {
                 type: 'bar',
                 data: {
@@ -168,21 +221,34 @@
                     maintainAspectRatio: false
                 }
             })
-        })
 
-    /*  LINHA  */
-    fetch("/dashboard/quiz-dia")
-        .then(res => res.json())
-        .then(dados => {
+        }).catch(function(erro) {
+            console.log("Erro:", erro);
+            
+        });
+    }
 
+
+    function graficoQuizDia(){
+        /*  LINHA  */
+        fetch("/dashboard/quiz-dia", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function(res){
+            return res.json();
+
+        }).then(function(dados) {
+    
             let labels = [];
             let valores = [];
-
+    
             for (let i = 0; i < dados.length; i++) {
                 labels.push(dados[i].dia);
                 valores.push(dados[i].total);
             }
-
+    
             new Chart(document.getElementById('linha'), {
                 type: 'line',
                 data: {
@@ -199,19 +265,31 @@
                     maintainAspectRatio: false
                 }
             })
-        })
+
+        }).catch(function(erro) {
+            console.log("Erro:", erro);
+            
+        });
+    }
 
 
-    /*  POLAR (USUÁRIO LOGADO)  */
-    fetch(`/dashboard/compatibilidade/${sessionStorage.ID_USUARIO}`)
-        .then(res => res.json())
-        .then(dados => {
+    function graficoCompatibilidadeUsuario(){
+        /*  POLAR (USUÁRIO LOGADO)  */
+        fetch(`/dashboard/compatibilidade/${sessionStorage.ID_USUARIO}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function(res){
+            return res.json();
 
+        }).then(function(dados) {
+    
             let valoresDuel = (dados[0].pontosDuelista / 10) * 100
             let valoresContro = (dados[0].pontosControlador / 10) * 100
             let valoresIni = (dados[0].pontosIniciador / 10) * 100
             let valoresSent = (dados[0].pontosSentinela / 10) * 100
-
+    
             new Chart(document.getElementById('polarArea'), {
                 type: 'polarArea',
                 data: {
@@ -232,6 +310,10 @@
                     }]
                 }
             })
-        })
 
+        }).catch(function(erro) {
+            console.log("Erro:", erro);
+            
+        });
+    }
 </script>
