@@ -90,7 +90,8 @@ function quizDia(){
         COUNT(*) AS total
     FROM quiz
     GROUP BY dia
-    ORDER BY dia;
+    ORDER BY dia
+    LIMIT 7;
     `
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

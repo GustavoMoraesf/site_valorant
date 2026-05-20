@@ -97,8 +97,8 @@ APP_HOST=localhost
 Crie um banco de dados MySQL e execute os comandos abaixo:
 
 ```sql
-CREATE DATABASE valorant_universe;
-USE valorant_universe;
+CREATE DATABASE ValorantUniverse;
+USE ValorantUniverse;
 
 CREATE TABLE usuario(
     idUser INT PRIMARY KEY AUTO_INCREMENT,
