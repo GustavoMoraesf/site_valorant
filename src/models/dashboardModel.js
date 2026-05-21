@@ -90,7 +90,7 @@ function quizDia(){
         COUNT(*) AS total
     FROM quiz
     GROUP BY dia
-    ORDER BY dia
+    ORDER BY dia DESC
     LIMIT 7;
     `
 

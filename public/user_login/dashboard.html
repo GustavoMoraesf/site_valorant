@@ -244,7 +244,7 @@
             let labels = [];
             let valores = [];
     
-            for (let i = 0; i < dados.length; i++) {
+            for (let i = dados.length -1; i >= 0; i--) {
                 labels.push(dados[i].dia);
                 valores.push(dados[i].total);
             }
