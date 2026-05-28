@@ -18,9 +18,7 @@
 
         <div class="menu">
 
-            <button onclick="comecarJogo()">
-                Começar o jogo?
-            </button>
+            <a href="index.html"><button>Voltar</button></a>
 
             <select id="nivel">
                 <option selected disabled value="#">
@@ -35,16 +33,20 @@
                     Nivel Médio
                 </option>
 
-                <option value="500">
-                    Nivel Difícil
+                <option value="600">
+                    Modo Ranqueado
                 </option>
             </select>
 
             <p id="pontuacao"></p>
 
-            <a href="index.html"><button>Voltar</button></a>
+            <button onclick="comecarJogo()">
+                Começar o jogo?
+            </button>
 
         </div>
+
+        <div id="rankingMsg" class="ranking"><h1></h1></div>
 
         <div class="bola"></div>
 
@@ -55,6 +57,8 @@
 </html>
 
 <script>
+
+    plotarRanking()
 
     let pontos = 0
     let aparicoes = -1
@@ -69,6 +73,7 @@
     let timer = document.querySelector("#timer")
     let placar = document.querySelector("#placar")
     let selectNivel = document.querySelector("#nivel")
+    let ranking = document.querySelector("#rankingMsg")
 
     bola.addEventListener("click", function () {
 
@@ -108,6 +113,7 @@
 
         
         menu.style.display = "none"
+        ranking.style.display = "none"
         hud.style.display = "flex"
         bola.style.display = "flex"
 
@@ -124,20 +130,27 @@
             segundos--
             timer.innerHTML = segundos
 
+            
             if (segundos <= 0) {
                 finalizarJogo()
+                plotarRanking()
+                if (miliSegundos == 600){
+                    salvarRanking()
+                }
             }
+
         }, 1000)
     }
 
 
 
     function finalizarJogo() {
-
         bola.style.display = "none"
-        menu.style.display = "flex"
         hud.style.display = "none"
-
+        menu.style.display = "flex"
+        ranking.style.display = "flex"
+        
+        
         document.body.style.cursor = "default"
 
         let precisao = pontos / aparicoes * 100
@@ -151,6 +164,7 @@
         clearInterval(tempo)
         clearInterval(tempoJogo)
 
+        plotarRanking()
     }
 
 
@@ -169,6 +183,60 @@
 
         bola.style.left = `${numX}px`
         bola.style.top = `${numY}px`
+    }
+
+
+    function salvarRanking(){
+        let precisao = pontos / aparicoes * 100
+
+        fetch("/ranking/rankingSalvar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                precisaoServer: precisao,
+                pontosServer: pontos,
+                fkUser: sessionStorage.ID_USUARIO
+            }),
+        })
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+        
+        return false;
+    }
+
+    function plotarRanking(){
+        fetch("/ranking/rankingPlotar", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function(res){
+            return res.json()
+
+        }).then(function(dados) {
+            let msg = `<h1>Ranking </h1>`
+
+            for(let i =0; i < dados.length; i++){
+        
+                msg += `
+                <p> ${i+1}° | Nome: ${dados[i].nome} | Pontos: ${dados[i].pontos} | Precisao: ${dados[i].precisao}% </p>  
+                `
+            }
+
+            
+            rankingMsg.innerHTML = msg
+            
+
+        }).catch(function(erro) {
+            console.log("Erro:", erro)
+
+        })
     }
 
 </script>

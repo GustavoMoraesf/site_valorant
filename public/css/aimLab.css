@@ -29,6 +29,7 @@ body {
     align-items: center;
     color: white;
     z-index: 1000;
+    user-select: none;
 }
 
 #timer {
@@ -48,6 +49,7 @@ body {
     align-items: center;
     padding: 40px;
     width: 380px;
+    height: 310px;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
@@ -117,3 +119,25 @@ body {
 #pontuacao {
     font-size: 22px;
 }
+
+.ranking{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px;
+    width: 500px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.ranking h1{
+    color: #a83c49;
+}
+

@@ -119,6 +119,15 @@ CREATE TABLE quiz(
     CONSTRAINT fk_usuario 
         FOREIGN KEY (fkUser) REFERENCES usuario(idUser)
 );
+
+CREATE TABLE aimlab(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	pontos INT,
+	precisao INT,
+	fkUser INT,
+	CONSTRAINT ctFkUser 
+	FOREIGN KEY (fkUser) REFERENCES usuario(idUser)
+);
 ```
 
 ---
