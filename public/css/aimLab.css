@@ -141,3 +141,20 @@ body {
     color: #a83c49;
 }
 
+.btn_voltar{
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    align-content: center;
+    text-decoration: none;
+    color: white;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.voltar{
+    transform: scaleX(-1);
+    width: 20px;
+    filter: invert(100%)
+}
+
