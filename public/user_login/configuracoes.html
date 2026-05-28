@@ -27,7 +27,7 @@
     </div>
 
     <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="close-btn" id="close-btn">&times;</a>
+        <a href="javascript:void(0)" class="close-btn" id="close-btn">&times</a>
         <div class="login_user">
             <img src="../assets/imgs/fade_icon.webp" alt="" id="side_foto">
             <span id="side_user">Usuario</span>
@@ -105,79 +105,79 @@
     ipt_novoNome.value = sessionStorage.NOME_USUARIO
     
     if (sessionStorage.FOTO_USUARIO == null || sessionStorage.FOTO_USUARIO == "null") {
-        document.getElementById("open-btn").src = "../assets/imgs/icon_padrao.avif";
-        document.getElementById("side_foto").src = "../assets/imgs/icon_padrao.avif";
+        document.getElementById("open-btn").src = "../assets/imgs/icon_padrao.avif"
+        document.getElementById("side_foto").src = "../assets/imgs/icon_padrao.avif"
     } else {
-        document.getElementById("open-btn").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
-        document.getElementById("side_foto").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
+        document.getElementById("open-btn").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`
+        document.getElementById("side_foto").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`
     }
 
     // Função para abrir a side bar - width começa em 0 e ao clicar no icone aumenta o width
     document.getElementById('open-btn').addEventListener('click', function() {
-    document.getElementById('mySidebar').style.width = '280px';
-    });
+    document.getElementById('mySidebar').style.width = '280px'
+    })
 
     document.getElementById('close-btn').addEventListener('click', function() {
-    document.getElementById('mySidebar').style.width = '0';
-    });
+    document.getElementById('mySidebar').style.width = '0'
+    })
 
 
-    let senha_olho = document.getElementById("ipt_senhaAtual");
-    let olho = document.getElementById("olho");
+    let senha_olho = document.getElementById("ipt_senhaAtual")
+    let olho = document.getElementById("olho")
 
-    let senha2_olho = document.getElementById("ipt_senhaNova");
-    let olho2 = document.getElementById("olho2");
+    let senha2_olho = document.getElementById("ipt_senhaNova")
+    let olho2 = document.getElementById("olho2")
 
-    let senha3_olho = document.getElementById("ipt_senhaNovaConfirmacao");
-    let olho3 = document.getElementById("olho3");
+    let senha3_olho = document.getElementById("ipt_senhaNovaConfirmacao")
+    let olho3 = document.getElementById("olho3")
 
     function mostrarSenha(){
         if (senha_olho.type === "password") {
-            senha_olho.type = "text";
+            senha_olho.type = "text"
         } else {
-            senha_olho.type = "password";
+            senha_olho.type = "password"
         }
     }
 
-    olho.addEventListener("click", mostrarSenha);
+    olho.addEventListener("click", mostrarSenha)
 
     function mostrarSenha2(){
         if (senha2_olho.type === "password") {
-            senha2_olho.type = "text";
+            senha2_olho.type = "text"
         } else {
-            senha2_olho.type = "password";
+            senha2_olho.type = "password"
         }
     }
 
-    olho2.addEventListener("click", mostrarSenha2);
+    olho2.addEventListener("click", mostrarSenha2)
 
     function mostrarSenha3(){
         if (senha3_olho.type === "password") {
-            senha3_olho.type = "text";
+            senha3_olho.type = "text"
         } else {
-            senha3_olho.type = "password";
+            senha3_olho.type = "password"
         }
     }
 
-    olho3.addEventListener("click", mostrarSenha3);
+    olho3.addEventListener("click", mostrarSenha3)
 
     // variavel auxiliar
-    let fotoEscolhida = "";
+    let fotoEscolhida = ""
 
     function selecionarFoto(imgSelecionada, foto) {
         // salva a variavel da foto escolhida
-        fotoEscolhida = foto;
+        fotoEscolhida = foto
 
         // laço de repedição percorrendo todas as fotos e removendo o efeito 
         let lista = document.querySelectorAll(".fotos img")
 
         // percorre a lista removendo o efeito de selecionada
         for(let i = 0; i < lista.length; i++) {
-            lista[i].classList.remove("foto-selecionada");
+            lista[i].classList.remove("foto-selecionada")
         }
 
         // aplica um efeito mostrando na foto clicada
-        imgSelecionada.classList.add("foto-selecionada");
+        imgSelecionada.classList.add("foto-selecionada")
     }
 
     function salvarFoto() {
@@ -195,15 +195,15 @@
         .then(() => {
 
             // Atualiza o sessionStorage
-            sessionStorage.FOTO_USUARIO = fotoEscolhida;
+            sessionStorage.FOTO_USUARIO = fotoEscolhida
 
             // Atualiza as imagens automaticamente
-            document.getElementById("open-btn").src = `/assets/imgs/${fotoEscolhida}`;
+            document.getElementById("open-btn").src = `/assets/imgs/${fotoEscolhida}`
 
-            document.getElementById("side_foto").src = `/assets/imgs/${fotoEscolhida}`;
+            document.getElementById("side_foto").src = `/assets/imgs/${fotoEscolhida}`
 
-            alert("Foto atualizada!");
-        });
+            alert("Foto atualizada!")
+        })
     }
 
     function atualizarNome(){
@@ -222,15 +222,15 @@
         .then(() => {
 
             // Atualiza o sessionStorage
-            sessionStorage.NOME_USUARIO = novoNome;
+            sessionStorage.NOME_USUARIO = novoNome
 
             // Atualiza as imagens automaticamente
             ipt_novoNome.value = sessionStorage.NOME_USUARIO
             side_user.innerHTML = sessionStorage.NOME_USUARIO
 
-            alert("Nome atualizado!");
+            alert("Nome atualizado!")
             console.log(novoNome)
-        });
+        })
 
     }
 
@@ -238,42 +238,42 @@
         let senhaAtual = ipt_senhaAtual.value
         let senhaNova = ipt_senhaNova.value
         let senhaNova2 = ipt_senhaNovaConfirmacao.value
-        let campos = [senhaAtual, senhaNova, senhaNova2];
-        let temEspecial = false;
-        let especiais = "!@#$%^&*()_+-=[]{}|;:'\",.<>?/";
+        let campos = [senhaAtual, senhaNova, senhaNova2]
+        let temEspecial = false
+        let especiais = "!@#$%^&*()_+-=[]{}|:'\",.<>?/"
 
 
         for (let i = 0; i < campos.length; i++) {
             if (campos[i] == "") {
-                div_msg.innerHTML = `<span style="color: red;">Preencha todos os campos</span>`;
-                return false;
+                div_msg.innerHTML = `<span style="color: red">Preencha todos os campos</span>`
+                return false
             }
         }
 
         for (let i = 0; i < senhaNova.length; i++) {
             if (especiais.includes(senhaNova[i])) {
-                temEspecial = true;
-                break;
+                temEspecial = true
+                break
             }
-        }
+        }''
 
 
         if(senhaAtual != sessionStorage.SENHA_USUARIO){
-            div_msg.innerHTML = 'Senha atual <span style="color: red;"> Incorreta </span>'
+            div_msg.innerHTML = 'Senha atual <span style="color: red"> Incorreta </span>'
         } else if(senhaNova.length < 8){
-            div_msg.innerHTML = `A senha deve ter no <span style="color: red;"> mínimo 8 caracteres </span>`
+            div_msg.innerHTML = `A senha deve ter no <span style="color: red"> mínimo 8 caracteres </span>`
             return false
         } else if(senhaNova == senhaNova.toUpperCase()){
-            div_msg.innerHTML = `A senha deve ter letras <span style="color: red;"> minúsculas </span>`
+            div_msg.innerHTML = `A senha deve ter letras <span style="color: red"> minúsculas </span>`
             return false
         } else if(senhaNova == senhaNova.toLowerCase()){
-            div_msg.innerHTML = `A senha deve ter letras <span style="color: red;"> maiúsculas </span>`
+            div_msg.innerHTML = `A senha deve ter letras <span style="color: red"> maiúsculas </span>`
             return false
         } else if (!temEspecial) {
-            div_msg.innerHTML = `A senha deve ter pelo menos <span style="color: red;">1 caractere especial</span>`;
-            return false;
+            div_msg.innerHTML = `A senha deve ter pelo menos <span style="color: red">1 caractere especial</span>`
+            return false
         } else if (senhaNova != senhaNova2){
-            div_msg.innerHTML = `As senhas devem ser <span style="color: red;"> iguais </span>`
+            div_msg.innerHTML = `As senhas devem ser <span style="color: red"> iguais </span>`
             return false
         } else{
             div_msg.innerHTML = ''
@@ -293,9 +293,9 @@
             .then(res => res.json())
             .then(() => {
 
-                alert("Senha Atualizada");
+                alert("Senha Atualizada")
                 console.log(senhaNova)
-            });
+            })
 
         }
     }

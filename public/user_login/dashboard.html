@@ -33,6 +33,9 @@
                     <a href="index.html#arsenal">Arsenal</a>
                 </li>
                 <li>
+                    <a href="aimLab.html">Treino de Mira</a>
+                </li>
+                <li>
                     <a href="quiz.html">Quiz</a>
                 </li>
                 <li>
@@ -84,40 +87,39 @@
 
 <script>
     window.onload = function () {
-        kpiTotalUsuario();
-        kpiFuncaoPopular();
-        graficoDistribuicaoGeral();
-        graficoUsuarioFuncao();
-        graficoQuizDia();
-        graficoCompatibilidadeUsuario();
-    };
+        kpiTotalUsuario()
+        kpiFuncaoPopular()
+        graficoDistribuicaoGeral()
+        graficoUsuarioFuncao()
+        graficoQuizDia()
+        graficoCompatibilidadeUsuario()
+    }
 
     nome_user.innerHTML = sessionStorage.NOME_USUARIO
 
     // Verificando se o usário ja tem foto salva, caso não tenha exibe a foto "Padrão"
     if (sessionStorage.FOTO_USUARIO == null || sessionStorage.FOTO_USUARIO == "null") {
-        document.getElementById("foto_user").src = "../assets/imgs/icon_padrao.avif";
+        document.getElementById("foto_user").src = "../assets/imgs/icon_padrao.avif"
     } else {
-        document.getElementById("foto_user").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
+        document.getElementById("foto_user").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`
     }
 
     function kpiTotalUsuario(){
-        /*  KPI  */
         fetch("/dashboard/total-usuarios", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(function(res){
-            return res.json();
+            return res.json()
 
         }).then(function(dados) {
             total_user.innerHTML = dados[0].total_usuarios
 
         }).catch(function(erro) {
-            console.log("Erro:", erro);
+            console.log("Erro:", erro)
 
-        });
+        })
     }
 
 
@@ -128,27 +130,26 @@
                 'Content-Type': 'application/json'
             }
         }).then(function(res){
-            return res.json();
+            return res.json()
 
         }).then(function(dados) {
             func_popular.innerHTML = dados[0].funcao
 
         }).catch(function(erro) {
-            console.log("Erro:", erro);
+            console.log("Erro:", erro)
             
-        });
+        })
     }
 
 
     function graficoDistribuicaoGeral(){
-        /*  DONUT  */
         fetch("/dashboard/distribuicao-geral", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(function(res){
-            return res.json();
+            return res.json()
 
         }).then(function(dados) {
     
@@ -166,39 +167,38 @@
                             valores.sentinela
                         ],
                         backgroundColor: [
-                            '#ffc800',
-                            '#4ea1ff',
+                            '#ff0000',
                             '#050045',
-                            '#ff0000'
+                            '#ffc800',
+                            '#4ea1ff'
                         ]
                     }]
                 }
             })
 
         }).catch(function(erro) {
-            console.log("Erro:", erro);
+            console.log("Erro:", erro)
             
-        });
+        })
     }
 
     function graficoUsuarioFuncao(){
-        /*  BARRAS  */
         fetch("/dashboard/usuarios-funcao", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(function(res){
-            return res.json();
+            return res.json()
 
         }).then(function(dados) {
     
-            let labels = [];
-            let valores = [];
+            let labels = []
+            let valores = []
     
             for (let i = 0; i < dados.length; i++) {
-                labels.push(dados[i].funcao);
-                valores.push(dados[i].total);
+                labels.push(dados[i].funcao)
+                valores.push(dados[i].total)
             }
     
             new Chart(document.getElementById('barra'), {
@@ -223,30 +223,29 @@
             })
 
         }).catch(function(erro) {
-            console.log("Erro:", erro);
+            console.log("Erro:", erro)
             
-        });
+        })
     }
 
 
     function graficoQuizDia(){
-        /*  LINHA  */
         fetch("/dashboard/quiz-dia", {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(function(res){
-            return res.json();
+            return res.json()
 
         }).then(function(dados) {
     
-            let labels = [];
-            let valores = [];
+            let labels = []
+            let valores = []
     
             for (let i = dados.length -1; i >= 0; i--) {
-                labels.push(dados[i].dia);
-                valores.push(dados[i].total);
+                labels.push(dados[i].dia)
+                valores.push(dados[i].total)
             }
     
             new Chart(document.getElementById('linha'), {
@@ -267,21 +266,20 @@
             })
 
         }).catch(function(erro) {
-            console.log("Erro:", erro);
+            console.log("Erro:", erro)
             
-        });
+        })
     }
 
 
     function graficoCompatibilidadeUsuario(){
-        /*  POLAR (USUÁRIO LOGADO)  */
         fetch(`/dashboard/compatibilidade/${sessionStorage.ID_USUARIO}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(function(res){
-            return res.json();
+            return res.json()
 
         }).then(function(dados) {
     
@@ -302,18 +300,18 @@
                             valoresSent
                         ],
                         backgroundColor: [
-                            '#ffc800',
-                            '#4ea1ff',
+                            '#ff0000',
                             '#050045',
-                            '#ff0000'
+                            '#ffc800',
+                            '#4ea1ff'
                         ]
                     }]
                 }
             })
 
         }).catch(function(erro) {
-            console.log("Erro:", erro);
+            console.log("Erro:", erro)
             
-        });
+        })
     }
 </script>

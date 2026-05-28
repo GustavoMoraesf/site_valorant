@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aim Lab</title>
+    <link rel="stylesheet" href="../css/aimLab.css">
+</head>
+
+<body>
+
+    <div class="background">
+
+        <div class="hud">
+            <h1 id="timer"></h1>
+            <p id="placar"></p>
+        </div>
+
+        <div class="menu">
+
+            <button onclick="comecarJogo()">
+                Começar o jogo?
+            </button>
+
+            <select id="nivel">
+                <option selected disabled value="#">
+                    Selecione um nivel para jogar
+                </option>
+
+                <option value="1000">
+                    Nivel Fácil
+                </option>
+
+                <option value="700">
+                    Nivel Médio
+                </option>
+
+                <option value="500">
+                    Nivel Difícil
+                </option>
+            </select>
+
+            <p id="pontuacao"></p>
+
+            <a href="index.html"><button>Voltar</button></a>
+
+        </div>
+
+        <div class="bola"></div>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+    let pontos = 0
+    let aparicoes = -1
+
+    let tempo
+    let tempoJogo
+    let segundos = 30
+
+    let bola = document.querySelector(".bola")
+    let menu = document.querySelector(".menu")
+    let hud = document.querySelector(".hud")
+    let timer = document.querySelector("#timer")
+    let placar = document.querySelector("#placar")
+    let selectNivel = document.querySelector("#nivel")
+
+    bola.addEventListener("click", function () {
+
+        let miliSegundos = Number(selectNivel.value)
+
+        pontos++
+        placar.innerHTML = `${pontos}/${aparicoes}`
+
+        moverBola()
+
+        clearInterval(tempo)
+        tempo = setInterval(function () {
+            moverBola()
+        }, miliSegundos)
+
+    })
+
+
+
+    function comecarJogo() {
+
+        let miliSegundos = selectNivel.value
+
+        if (miliSegundos == "#") {
+            alert("Selecione um modo de jogo para começar!")
+            return
+        }
+
+        document.body.style.cursor = "crosshair"
+
+        pontos = 0
+        aparicoes = -1
+        segundos = 30
+
+        timer.innerHTML = segundos
+        placar.innerHTML = `0/0`
+
+        
+        menu.style.display = "none"
+        hud.style.display = "flex"
+        bola.style.display = "flex"
+
+        moverBola()
+
+        clearInterval(tempo)
+        clearInterval(tempoJogo)
+
+        tempo = setInterval(function () {
+            moverBola()
+        }, Number(miliSegundos))
+
+        tempoJogo = setInterval(function () {
+            segundos--
+            timer.innerHTML = segundos
+
+            if (segundos <= 0) {
+                finalizarJogo()
+            }
+        }, 1000)
+    }
+
+
+
+    function finalizarJogo() {
+
+        bola.style.display = "none"
+        menu.style.display = "flex"
+        hud.style.display = "none"
+
+        document.body.style.cursor = "default"
+
+        let precisao = pontos / aparicoes * 100
+
+        pontuacao.innerHTML = ` 
+            Pontos: ${pontos} <br>
+            Aparições: ${aparicoes} <br>
+            Precisão: ${precisao.toFixed()}%
+        `
+
+        clearInterval(tempo)
+        clearInterval(tempoJogo)
+
+    }
+
+
+    function moverBola() {
+
+        aparicoes++
+        placar.innerHTML = `${pontos}/${aparicoes}`
+
+        let larguraTela = window.innerWidth
+        let alturaTela = window.innerHeight
+        let larguraBola = bola.offsetWidth
+        let alturaBola = bola.offsetHeight
+
+        let numX = Math.floor(Math.random() * (larguraTela - larguraBola))
+        let numY = Math.floor(Math.random() * (alturaTela - alturaBola))
+
+        bola.style.left = `${numX}px`
+        bola.style.top = `${numY}px`
+    }
+
+</script>

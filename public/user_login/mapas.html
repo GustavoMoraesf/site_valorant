@@ -27,6 +27,9 @@
                     <a href="index.html#arsenal">Arsenal</a>
                 </li>
                 <li>
+                    <a href="aimLab.html">Treino de Mira</a>
+                </li>
+                <li>
                     <a href="quiz.html">Quiz</a>
                 </li>
                 <li>
@@ -197,20 +200,20 @@
 
     // Verificando se o usário ja tem foto salva, caso não tenha exibe a foto "Padrão"
     if (sessionStorage.FOTO_USUARIO == null || sessionStorage.FOTO_USUARIO == "null") {
-        document.getElementById("open-btn").src = "../assets/imgs/icon_padrao.avif";
-        document.getElementById("side_foto").src = "../assets/imgs/icon_padrao.avif";
+        document.getElementById("open-btn").src = "../assets/imgs/icon_padrao.avif"
+        document.getElementById("side_foto").src = "../assets/imgs/icon_padrao.avif"
     } else {
-        document.getElementById("open-btn").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
-        document.getElementById("side_foto").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`;
+        document.getElementById("open-btn").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`
+        document.getElementById("side_foto").src = `../assets/imgs/${sessionStorage.FOTO_USUARIO}`
     }
 
 
     // Função para abrir a side bar - width começa em 0 e ao clicar no icone aumenta o width
     document.getElementById('open-btn').addEventListener('click', function() {
-    document.getElementById('mySidebar').style.width = '280px';
-    });
+        document.getElementById('mySidebar').style.width = '280px'
+    })
 
     document.getElementById('close-btn').addEventListener('click', function() {
-    document.getElementById('mySidebar').style.width = '0';
-    });
+        document.getElementById('mySidebar').style.width = '0'
+    })
 </script>
