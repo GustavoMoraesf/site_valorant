@@ -133,7 +133,6 @@
             
             if (segundos <= 0) {
                 finalizarJogo()
-                plotarRanking()
                 if (miliSegundos == 600){
                     salvarRanking()
                 }
@@ -163,8 +162,6 @@
 
         clearInterval(tempo)
         clearInterval(tempoJogo)
-
-        plotarRanking()
     }
 
 
@@ -202,6 +199,7 @@
         })
         .then(function (resposta) {
             console.log("resposta: ", resposta);
+            plotarRanking()
         })
         .catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
