@@ -117,7 +117,7 @@ CREATE TABLE quiz(
     dtQuiz DATETIME DEFAULT CURRENT_TIMESTAMP,
     fkUser INT,
     CONSTRAINT fk_usuario 
-        FOREIGN KEY (fkUser) REFERENCES usuario(idUser)
+	FOREIGN KEY (fkUser) REFERENCES usuario(idUser)
 );
 
 CREATE TABLE aimlab(
@@ -153,6 +153,7 @@ npm start
  ┣ 📁 js
  ┣ 📁 user_login
  ┣  ┣ 📁 agentes
+ ┣  ┣ 📁 aimLab
  ┣  ┣ 📁 configuracoes
  ┣  ┣ 📁 dashboard
  ┣  ┣ 📁 index
