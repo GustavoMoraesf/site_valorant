@@ -26,6 +26,7 @@ O principal objetivo do projeto é aplicar e aprofundar conhecimentos em desenvo
 - Dashboard com ranking e estatísticas
 - Armazenamento de resultados em banco de dados
 - Interface dinâmica e responsiva
+- Jogo para o usuario treinar mira (Aim Lab)
 
 ---
 
